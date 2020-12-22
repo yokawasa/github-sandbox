@@ -1,0 +1,78 @@
+on:
+  push:
+    branches:
+      - test-docker-layer-cache
+
+### docker layer cacheのテスト
+#---------------------------------------------------------------------
+# docker-cache/Dockerfile - 2.6Gのイメージ
+#---------------------------------------------------------------------
+# 結論: ここで利用するDockerfileだと毎回ビルドと比べてあまり違いが見られない
+# TEST docker_build_buildkit_with_no_cache:
+# https://github.com/yokawasa/actions-sandbox/runs/744089446?check_suite_focus=true
+# 1st run:
+#   - build step - 3m8sec
+# https://github.com/yokawasa/actions-sandbox/runs/744108306?check_suite_focus=true
+# 2nd run:
+#   - build step - 4m 18sec
+# 
+#TEST docker_build_with_cache:
+# https://github.com/yokawasa/actions-sandbox/runs/743992269?check_suite_focus=true
+# 1st run:
+#   - cache step   - 0 sec
+#   - load step    - 0 sec  (skip)
+#   - build step   - 6m7sec
+#   - save step    - 4m57sec
+#   - post cache   - 47 sec
+# https://github.com/yokawasa/actions-sandbox/runs/744108278?check_suite_focus=true
+# 2nd run:
+#   - cache step   -  52 sec
+#   - load step    -  1m39sec
+#   - build step   -  0 sec
+#   - tagging step -  0 sec (skip)
+#   - post cache   -  0 sec 
+
+
+jobs:
+
+  docker_build_with_no_cache:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          cd docker-cache
+          docker build . -t myimage
+
+  docker_build_buildkit_with_no_cache:
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_BUILDKIT: 1
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          cd docker-cache
+          docker build . -t myimage
+
+  docker_build_with_cache:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - id: cache-docker
+        uses: actions/cache@v2
+        with:
+          path: /tmp/docker-cache
+          key: docker-cache-test-${{ hashFiles('docker-cache/Dockerfile') }}
+      - run: docker load -i /tmp/docker-cache/snapshot.tar || true
+        if: steps.cache-docker.outputs.cache-hit == 'true'
+      - run: |
+          cd docker-cache
+          # --cache-from: myimage-cache is an image to consider as cache sources. 
+          # キャッシュされた Docker イメージの使用
+          # https://cloud.google.com/cloud-build/docs/speeding-up-builds?hl=ja
+          docker build . -t myimage --cache-from=myimage-cache
+      - run: |
+          docker tag myimage myimage-cache
+          mkdir -p /tmp/docker-cache
+          docker save myimage-cache -o /tmp/docker-cache/snapshot.tar
+          ls -lh /tmp/docker-cache || true
+        if: always() && steps.cache-docker.outputs.cache-hit != 'true'

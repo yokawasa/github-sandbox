@@ -1,0 +1,15 @@
+name: Test JavaScript Action
+on:
+  # Trigger the workflow on push ( only for the master branch )
+  push:
+    branches:
+      - javascript-action
+
+jobs:
+  one:
+    runs-on: ubuntu-16.04
+    steps:
+      - name: Test JavaScript Action
+        uses: yokawasa/javascript-action@v1
+        with:
+          milliseconds: 1000

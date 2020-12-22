@@ -1,0 +1,72 @@
+on:
+  push:
+    branches:
+      - test-skip
+jobs:
+  one:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v2
+
+      - name: hoge0
+        id: hoge0
+        run: |
+          scripts/hoge0.sh
+          status=$?
+          if [[ ${status} -eq 2 ]]; then
+            echo "hoge0: ${status}"
+            echo "::set-output name=skipped::yes"
+          fi
+      - name: after hoge0
+        run: |
+          echo "after hoge0 aws NOT skipped"
+          echo ${{ steps.hoge0.outputs.skipped }}
+        if: ${{ ! steps.hoge0.outputs.skipped }} 
+        # if: ${{ steps.hoge0.outputs.skipped != true }} ::set-output name=skipped::${{ false }}してもこれは機能しない　
+        #if: steps.hoge0.outputs.skipped != "true" <<<<<< これは信託ックスエラー
+        #if: ${{ ! steps.hoge0.outputs.skipped }}  <<<<<<<<<<<<< これがうまく機能しない　
+      - name: hoge1
+        id: hoge1
+        run: |
+          scripts/hoge1.sh | true
+          # status=$?
+          status=${PIPESTATUS[0]}
+          # if [[ ${status} -ne 0 ]]; then
+          if [[ ${status} -eq 2 ]]; then
+            echo "hoge1: ${status}"
+            # echo "::set-output name=skipped::${{ false }}"
+            echo "::set-output name=skipped::yes"
+          elif [[ ${status} -ne 0 ]]; then
+            echo "hoge1: ここで朽ち果てる!!!"
+            exit ${status} 
+          fi
+      - name: after hoge1
+        run: |
+          echo "after hoge1 aws NOT skipped"
+          echo ${{ steps.hoge1.outputs.skipped }}
+        if: ${{ ! steps.hoge1.outputs.skipped }}
+        # if: ${{ steps.hoge1.outputs.skipped != true }}
+        # if: steps.hoge1.outputs.skipped != "true"
+        #if: ${{ ! steps.hoge1.outputs.skipped }}
+      - name: hoge2
+        id: hoge2
+        run: |
+          scripts/hoge2.sh | true
+          status=${PIPESTATUS[0]}
+          #if [[ ${status} -ne 0 ]]; then
+          if [[ ${status} -eq 2 ]]; then
+            echo "hoge2: ${status}"
+            #echo "::set-output name=skipped::${{ true }}"
+            echo "::set-output name=skipped::yes"
+          fi
+      - name: after hoge2
+        run: |
+          echo "after hoge2 was NOT skipped"
+          echo ${{ steps.hoge2.outputs.skipped }}
+        # if: ! steps.hoge2.outputs.skipped <<<< これはシンタックスエラー
+        if: ${{ ! steps.hoge2.outputs.skipped }}
+        # if: ${{ steps.hoge2.outputs.skipped != true }}
+        # if: steps.hoge2.outputs.skipped != "true"
+        #if: ${{ ! steps.hoge2.outputs.skipped }}
+
