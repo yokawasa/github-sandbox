@@ -1,0 +1,30 @@
+name: pr files workflow
+on: pull_request
+
+jobs:
+  sqlcheck:
+    name: get pr files
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get PR files
+      id: get_pr_files
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
+      run: |
+        pr_num=${{ github.event.pull_request.number }}
+        request_url="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${pr_num}/files"
+        auth_header="Authorization: token ${GITHUB_TOKEN}"
+        files=$(curl -s -H "$auth_header" -X GET -G ${request_url} | jq -r '.[] | .filename')
+        echo "::set-output name=prfiles::${files}"
+    # https://github.com/marketplace/actions/slack-notify
+    - name: Slack Notification
+      uses: rtCamp/action-slack-notify@v2.0.0
+      env:
+        SLACK_CHANNEL: general
+        SLACK_COLOR: '#3278BD'
+        SLACK_ICON: https://github.com/rtCamp.png?size=48
+        # SLACK_MESSAGE: 'Post Content :rocket:'
+        SLACK_MESSAGE: ${{steps.get_pr_files.outputs.prfiles}}
+        SLACK_TITLE: PR Files 
+        SLACK_USERNAME: rtCamp
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

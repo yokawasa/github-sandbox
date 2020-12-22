@@ -1,0 +1,15 @@
+name: Test Docker Container Action
+on:
+  # Trigger the workflow on push ( only for the master branch )
+  push:
+    branches:
+      - container-action
+
+jobs:
+  one:
+    runs-on: ubuntu-16.04
+    steps:
+      - name: Test Docker Container Action
+        uses: yokawasa/container-action@v1
+        with:
+          myInput: 'world'

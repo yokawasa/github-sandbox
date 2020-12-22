@@ -1,0 +1,59 @@
+name: Vulnerability Scan
+# https://github.com/homoluctus/gitrivy
+on:
+  #schedule:
+  #  - cron: '0 9 * * *'
+  push:
+    branches:
+      - test-trivy-scan
+
+jobs:
+# gitrivy_scan:
+#    name: Vulnerability Scan with Gitrivy
+#    runs-on: ubuntu-18.04
+#    env:
+#      IMAGE_NAME: python:3.4-alpine
+#    steps:
+#      - name: Pull docker image
+#        run: docker pull ${IMAGE_NAME}
+#      - uses: homoluctus/gitrivy@v1.0.0
+#        with:
+#          token: ${{ secrets.GITHUB_TOKEN }}
+#          image: ${IMAGE_NAME}
+#          issue: 'true'
+  trivy_scan:
+    name: Vulnerability Scan with Trivny
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Dump Secret
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MY_SECRET: ${{ secrets.mysecret }}
+        run: |
+          echo "GITHUB_TOKEN ${MY_SECRET}"
+          echo "MY_SECRET ${MY_SECRET}"
+      - name: Scan image for vulnerabilities
+        uses: docker://docker.io/aquasec/trivy:0.2.1
+        with:
+          args: --cache-dir /var/lib/trivy --severity HIGH,CRITICAL --quiet --exit-code 1 --output trivy.txt python:3.4-alpine
+          #args: --cache-dir /var/lib/trivy --output ${OUTPUT_FILE} ${IMAGE_NAME}
+      - name: Read Output File
+        id: read-trivy-output
+        if: failure()
+        run: |
+          echo $(cat trivy.txt)
+          echo ::set-output name=trivy-output::$(cat trivy.txt)
+      - name: Create an issue
+        #if: steps.read-trivy-ouput.outputs.trivy-output
+        if: always()
+        uses: actions/github-script@0.4.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          # body: ${{ steps.read-trivy-ouput.outputs.trivy-output }}
+          script: |
+            github.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'Vulnerability Scan failure',
+              body: 'Vulnerability Scan failure'
+            })

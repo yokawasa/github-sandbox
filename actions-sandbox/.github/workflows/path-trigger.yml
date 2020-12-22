@@ -1,0 +1,29 @@
+on:
+  pull_request:
+    branches:
+      - master
+    types: [opened, synchronize, closed]
+    paths:
+      - 'path-test/*.env'
+
+jobs:
+  dev:
+    env:
+      myenv: "dev"
+    runs-on: ubuntu-16.04
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+  stg:
+    env:
+      myenv: "stg"
+    runs-on: ubuntu-16.04
+    steps:
+      - name: 
+        run: echo "hello stg"
+
+
+
+

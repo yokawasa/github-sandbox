@@ -1,0 +1,74 @@
+on:
+  # Trigger the workflow on push ( only for the test-env-context branch )
+  push:
+    branches:
+      - test-expression
+jobs:
+  one:
+    env:
+      myenv: "production"
+    runs-on: ubuntu-16.04
+    steps:
+      - name: Set value to output
+        id: set-value
+        run: |
+          myvalue='yoichi'
+          echo ::set-output name=myvalue::$myvalue
+      - name: Get output
+        env:
+          MYVALUE: ${{ steps.set-value.outputs.myvalue }}
+        run: echo "myvalue=$MYVALUE"
+        if: steps.set-value.outputs.myvalue != ''
+      - name: how to set env with context
+        run: |
+          echo "myvalue=$TESTVALUE"
+        env:
+          TESTVALUE: Running this ( ${{ env.myenv }} ) 
+  two:
+    env:
+      myenv: "production"
+    runs-on: ubuntu-16.04
+    steps:
+      - name: Conditional test - step1
+        run: |
+          echo "do step1" 
+          #exit 1
+          exit 0
+      - name: Conditional test - step2
+        if: failure()
+        run: |
+          # this is done only if step1 failed
+          echo "do step2 after step1 failure"   
+      - name: Conditional test - do when success
+        if: success()
+        run: |
+          # this is done when previous steps success
+          echo "do success"
+      - name: Conditional test - step3
+        if: always()
+        run: |
+          # this is done even if step1 failed
+          echo "do step3"
+      - name: Conditional test - step4
+        run: |
+          # this is done only if step1 succeed
+          echo "do step4"
+      - name: Conditional test - step5
+        if: env.myenv == 'hoge'
+        run: |
+          # this is done only if env.myenv is equal to hoge
+          echo "do step5"
+      - name: Conditional test - step6
+        if: env.myenv == 'production'
+        run: |
+          echo "do step6"
+      - name: Conditional test - step7
+        #if: always() && env.myenv == 'production'
+        if: always() && env.myenv == 'hoge'
+        run: |
+          echo "do step7"
+      - name: Conditional test - do when success
+        if: success()
+        run: |
+          # this is done when previous steps success
+          echo "do success after step7"
