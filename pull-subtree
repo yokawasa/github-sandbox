@@ -1,4 +1,0 @@
-set -e -x
-
-SUBTREE_NAME=actions-sandbox
-git subtree pull --prefix=${SUBTREE_NAME} --squash ${SUBTREE_NAME} master
