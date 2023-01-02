@@ -47,8 +47,8 @@ This is my personal GitHub sandbox repository. Most of the content was written i
 		- [Undoテスト2: マージ成功後に元に戻す(git revert)](#undoテスト2-マージ成功後に元に戻すgit-revert)
 		- [Undoテスト3: コンフリクトでマージ失敗(マージ未完了)(git merge --abort)](#undoテスト3-コンフリクトでマージ失敗マージ未完了git-merge---abort)
 		- [Undoテスト4: コンフリクトでマージ失敗（マージ未完了）(git reset)](#undoテスト4-コンフリクトでマージ失敗マージ未完了git-reset)
-	- [cherry-pickで部分的な取り込みを行う](#cherry-pickで部分的な取り込みを行う)
-	- [cherry-pickの基本](#cherry-pickの基本)
+	- [cherry-pick](#cherry-pick)
+		- [cherry-pickの基本](#cherry-pickの基本)
 		- [絵で比較するmerge vs cherry-pick](#絵で比較するmerge-vs-cherry-pick)
 		- [git merge commit2](#git-merge-commit2)
 		- [git cherry-pick commit4](#git-cherry-pick-commit4)
@@ -1187,7 +1187,7 @@ git reset --hard 2d669b9
 ```
 
 
-## cherry-pickで部分的な取り込みを行う
+## cherry-pick
 
 ### cherry-pickの基本
 
