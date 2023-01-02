@@ -1189,7 +1189,7 @@ git reset --hard 2d669b9
 
 ## cherry-pickで部分的な取り込みを行う
 
-## cherry-pickの基本
+### cherry-pickの基本
 
 例えば PR (main -> release)において差分コミットがc0, c1, c2 ... cNと合った場合に、c1, c2, c4だけ取り込みたい場合のどうするだろう？ `git merge <commitID>`の場合、指定したcommitIDとその親に当たるcommitまで含めてmergeされてしまう（つまり c2をmergeするとその親にあたるc0, c1までも取り込まれる）。純粋に c1, c2, c4をmergeするには`cherry-pick`を使う
 
