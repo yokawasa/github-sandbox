@@ -868,6 +868,7 @@ git rebase -i HEAD~3
 ```
 
 すると次のようなvi edit pageが表示。
+
 ![](assets/update-commit-message1.png)
 
 修正したいコミット先頭の「pick」を「edit」に書き換える。
