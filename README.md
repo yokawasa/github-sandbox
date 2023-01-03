@@ -84,6 +84,7 @@ Gitプロジェクトの3つの主要な部分
 - `Local Repository (.git)`: プロジェクトのメタデータとオブジェクトのデータベース。リポジトリをクローンしたときにコピーされる。HEAD
 
 ![](assets/git-storage-model.png)
+
 ref: https://www3.ntu.edu.sg/home/ehchua/programming/howto/Git_HowTo.html
 
 HEAD / Stage(index) / Working directory
@@ -432,7 +433,6 @@ Date:   Tue Jun 7 12:59:02 2022 +0900
 
 remoteリポジトリにpush
 
-
 ## merge and rebaseの理解
 
 ### merge and rebaseの基本
@@ -457,8 +457,8 @@ git merge <branch> -m "コミットメッセージの内容"
 ```
 
 merge後の状態
-![](assets/mrege-rebase-basic-after-merge.png)
 
+![](assets/mrege-rebase-basic-after-merge.png)
 
 rebaseは?
 - コミット履歴を移動したり修正、削除したりするコマンド
@@ -470,6 +470,7 @@ git rebase <base>   # base = commit, branch, tag, etc.
 ```
 
 rebase後の状態
+
 ![](assets/mrege-rebase-basic-after-rebase.png)
 
 ref: https://www.atlassian.com/git/tutorials/merging-vs-rebasing
