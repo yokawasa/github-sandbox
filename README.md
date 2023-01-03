@@ -1,6 +1,6 @@
 # github-sandbox
 
-This is my personal GitHub sandbox repository. Most of the content was written in Japanese and  used in the GitHub onboarding (training) which I conducted in the past.
+This is my personal GitHub sandbox repository, and its content is primarily based on past GitHub trainings I've done for GitHub newbies.
 
 <!-- TOC -->
 
