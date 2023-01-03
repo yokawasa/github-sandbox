@@ -16,6 +16,7 @@ This is my personal GitHub sandbox repository. Most of the content was written i
 		- [git status](#git-status)
 		- [git add](#git-add)
 		- [git commit](#git-commit)
+			- [Add Signed-off-by message](#add-signed-off-by-message)
 		- [git log](#git-log)
 		- [git push](#git-push)
 	- [merge and rebaseの理解](#merge-and-rebaseの理解)
@@ -31,6 +32,9 @@ This is my personal GitHub sandbox repository. Most of the content was written i
 		- [テストデータを準備する](#テストデータを準備する)
 		- [commitを打ち消す](#commitを打ち消す)
 		- [commit logを書き換える](#commit-logを書き換える)
+	- [Update Commit Message](#update-commit-message)
+		- [直前のCommitメッセージを修正](#直前のcommitメッセージを修正)
+		- [3つ前のCommitメッセージを修正](#3つ前のcommitメッセージを修正)
 	- [Squash merge](#squash-merge)
 		- [Squash mergeの基本](#squash-mergeの基本)
 		- [テストデータを準備する](#テストデータを準備する-1)
@@ -40,8 +44,8 @@ This is my personal GitHub sandbox repository. Most of the content was written i
 	- [Undo/取り消しパターン(revert, reset, merge --abort,etc)](#undo取り消しパターンrevert-reset-merge---abortetc)
 		- [Undoの基本](#undoの基本)
 			- [git merge --abort](#git-merge---abort)
-			- [git reset ＜commit＞](#git-reset-＜commit＞)
-			- [git revert ＜commit＞](#git-revert-＜commit＞)
+			- [git reset commitID](#git-reset-commitid)
+			- [git revert commitID](#git-revert-commitid)
 		- [テスト準備](#テスト準備)
 		- [Undoテスト1: マージ成功後に元に戻す(git reset)](#undoテスト1-マージ成功後に元に戻すgit-reset)
 		- [Undoテスト2: マージ成功後に元に戻す(git revert)](#undoテスト2-マージ成功後に元に戻すgit-revert)
@@ -84,10 +88,11 @@ Gitプロジェクトの3つの主要な部分
 HEAD / Stage(index) / Working directory
 
 -  `HEAD`: the last commit in the currently checked-out branch
--  `Stage(index)`: Staging area, stage, index, cache はすべて同じ
+-  `Stage(index)`: Staging area, stage, index, cacheはすべて同じ
 -  `working directory (working tree)`
 
 ![](https://i.stack.imgur.com/y8gFk.png)
+
 ref: [How do I show the changes which have been staged?](https://stackoverflow.com/questions/1587846/how-do-i-show-the-changes-which-have-been-staged)
 
 ファイルの3つのステータス
@@ -326,7 +331,7 @@ Untracked files:
 nothing added to commit but untracked files present (use "git add" to track)
 ```
 
-### git add 
+### git add
 
 `git add`は変更されたファイルをステージエリア（インデックス）に追加する。
 さきほど追加されたtest.shをステージエリア（インデックス）に追加する。
@@ -354,6 +359,45 @@ Changes to be committed:
 git commit -m "updated"
 ```
 
+#### Add Signed-off-by message
+
+よくOSSでsign-off-byをつけたメッセージが求められるプロジェクトがある。
+たとえばこちらのプロジェクト → [Developer Certificate of Origin in KEDA](https://github.com/kedacore/keda/blob/main/CONTRIBUTING.md#developer-certificate-of-origin-signing-your-work)
+
+`git commit`に`-s` | `--signoff`オプションを追加することでcommitメッセージにsign-off-byを付与できる。
+
+```
+git commit -s -m 'This is my commit message'
+
+git log
+
+Author: Yoichi Kawasaki <yokawasa@gmail.com>
+Date:   Thu Jun 2 22:43:23 2022 +0900
+
+    This is my commit message
+    
+    Signed-off-by: Yoichi Kawasaki <yokawasa@gmail.com> <<<<<< これ
+```
+
+なお、sign-off-byメッセージは通常メッセージと同じように`--amend`オプションで修正することが可能
+
+```
+git commit --amend -s
+```
+
+デフォルトでコミットメッセージにsign-offを付与する方法ついてはこちらの[議論](https://stackoverflow.com/questions/15015894/git-add-signed-off-by-line-using-format-signoff-not-working)が参考になる。
+
+また、commit message templateを利用してももよいかもしれない。
+
+```
+Signed-off-by: Your Name <your.email@example.com>
+```
+
+これを次のようにcommit templateとして設定する
+
+```
+git config --global commit.template ~/MYPROJECT/git-template
+```
 ### git log
 
 Gitのログの履歴を確認する
@@ -777,7 +821,105 @@ git l
 ```
 
 
+## Update Commit Message
 
+### 直前のCommitメッセージを修正
+
+```bash
+git log 
+
+commit 693b3e407553900af577e9194dd158d59eb19c81 (HEAD -> main)
+Author: Yoichi Kawasaki <yokawasa@gmail.com>
+Date:   Sat Jun 4 00:15:20 2022 +0900
+
+    Wrong message 
+```
+
+No!! You can modify the latest commit message like this:
+
+```
+git commit --amend -m "Correct message"
+
+commit 693b3e407553900af577e9194dd158d59eb19c81 (HEAD -> main)
+Author: Yoichi Kawasaki <yokawasa@gmail.com>
+Date:   Sat Jun 4 00:15:20 2022 +0900
+
+    Correct message 
+```
+
+ref: [Fix commit message](https://www.granfairs.com/blog/staff/git-commit-fix)
+
+### 3つ前のCommitメッセージを修正
+
+```
+git log --oneline
+
+b7ec5be (HEAD -> master) This is my commit message
+ce12a90 This is my commit message
+a046ce0 (origin/master, origin/HEAD) Added sqlcheck.yml <<<これを変えたい
+```
+
+↑３つ前を変えたい.
+一番新しいコミットを1として、修正したいコミットまでの数を数えて、「HEAD~」のあとにその数を入力する。 今回修正したいのは3番目なので「HEAD~3」とする
+
+```
+git rebase -i HEAD~3
+```
+
+すると次のようなvi edit pageが表示。
+![](assets/update-commit-message1.png)
+
+修正したいコミット先頭の「pick」を「edit」に書き換える。
+
+![](assets/update-commit-message2.png)
+
+次のコマンドでコメントを修正する
+
+```
+git commit --amend 
+```
+
+![](assets/update-commit-message3.png)
+
+もしくは、単に`-m`オプションを付与してメッセージを更新できる
+
+```
+git commit --amend -s -m "Added sqlcheck.yml added message"
+```
+
+そして、次のコマンドを入力してrebaseを成功させる。これでmainブランチにスイッチされる。
+
+```
+git rebase --continue
+
+Successfully rebased and updated refs/heads/master.
+```
+
+メッセージが修正されているかを確認する
+
+```
+git log --oneline
+
+6877420 (HEAD -> master) This is my commit message
+963cc1f This is my commit message
+c49eeb0 Added sqlcheck.yml added message <<<<<<<<<<<<<<< 期待通り変更されている
+```
+
+最後にローカルの変更をoriginにpush。このとき `--force`指定がないとpushが失敗して次のようなエラーがでる
+
+![](assets/update-commit-message4.png)
+
+これは、rebaseをしてremote/localで異なるログを持つため、通常はそのままではgit pushできない。
+対応としては、`--force | -f`でremoteブランチをローカルのそれによって強制上書きする。
+
+```
+git push origin master --force
+```
+
+
+ref:
+- [Fix commit message](https://www.granfairs.com/blog/staff/git-commit-fix)
+- [git fast-forward mergeについて](https://qiita.com/vsanna/items/451b42f886c599a16a55)
 
 ## Squash merge
 
@@ -918,7 +1060,7 @@ PRを作成し、approveされmergeボタンを押すときに以下のイメー
 - **マージが完了している場合はUndoできない**
 - **コミット履歴: 残らない**
 
-#### git reset ＜commit＞
+#### git reset commitID
 - マージのUndo（リモートもOKだけどローカルUndoを推奨）。指定したコミットまで戻る。マージが完了していてもUndo可。
 - **コミット履歴: 消える**
 - 2つの使い方が可能
@@ -939,7 +1081,7 @@ git reset --hard <commitID>
 - これを使うのはローカルのみ! 複数人での共同開発レポジトリでは使わないことを推奨
   - コミット履歴は過去のコミットに全て紐づいているので過去のコミット履歴が変わると、その後のコミットのコミット番号も変わる。よって、git resetでコミットを戻してリモートレポジトリにプッシュしてしまうと、他の人たちのコミット履歴とズレてエラーが発生する。迷惑＆嫌がられる
 
-#### git revert ＜commit＞
+#### git revert commitID
 - マージのUndo（リモートでもOK）
 - **コミット履歴: 残る**
 - 使い方
@@ -1362,22 +1504,22 @@ cherry3.md
 取り込みたいリポジトリを、外部リポジトリに登録する
 
 ```
-SUBTREE_NAME=actions-sandbox
-git remote add $SUBTREE_NAME git@github.com:yokawasa/actions-sandbox.git
+SUBTREE_NAME=github-sandbox
+git remote add $SUBTREE_NAME git@github.com:yokawasa/github-sandbox.git
 
 ```
 
 外部リポジトリに登録したものをサブディレクトリに登録する
 
 ```
-SUBTREE_NAME=actions-sandbox
-git subtree add --prefix=${SUBTREE_NAME} --squash ${SUBTREE_NAME} master
+SUBTREE_NAME=github-sandbox
+git subtree add --prefix=${SUBTREE_NAME} --squash ${SUBTREE_NAME} main
 ```
 
 ### pull subtree
 
 ```
-SUBTREE_NAME=actions-sandbox
-git subtree pull --prefix=${SUBTREE_NAME} --squash ${SUBTREE_NAME} master
+SUBTREE_NAME=github-sandbox
+git subtree pull --prefix=${SUBTREE_NAME} --squash ${SUBTREE_NAME} main
 ```
 
