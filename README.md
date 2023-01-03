@@ -79,11 +79,12 @@ Gitの基本ワークフロー
   3. コミットする(`git commit`)
 
 Gitプロジェクトの3つの主要な部分
-- `作業ディレクトリ(working dirs)`: プロジェクトの1つのバージョンがチェックアウトされたもの。Gitディレクトリの圧縮されたデータベースから引き出されてディスクに配置。自分たちが直接編集するのはここ。
-- `ステージング・エリア (stage / index)`: 次のコミットに何が含まれるかに関しての情報を蓄えた1つのファイル。「インデックス」とも呼ばれる。実体は`.git/index`
-- `Gitディレクトリ(.git)`: プロジェクトのメタデータとオブジェクトのデータベース。リポジトリをクローンしたときにコピーされる
+- `Working Directory (Working Tree)`: プロジェクトの1つのバージョンがチェックアウトされたもの。Gitディレクトリの圧縮されたデータベースから引き出されてディスクに配置。自分たちが直接編集するのはここ。
+- `Staging Area (stage / index / cache)`: 次のコミットに何が含まれるかに関しての情報を蓄えた1つのファイル。「インデックス」とも呼ばれる。実体は`.git/index`
+- `Local Repository (.git)`: プロジェクトのメタデータとオブジェクトのデータベース。リポジトリをクローンしたときにコピーされる。HEAD
 
-![](assets/git-basic-local-remote.png)
+![](assets/git-storage-model.png)
+ref: https://www3.ntu.edu.sg/home/ehchua/programming/howto/Git_HowTo.html
 
 HEAD / Stage(index) / Working directory
 
