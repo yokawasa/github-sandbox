@@ -28,6 +28,7 @@ This is my personal GitHub sandbox repository, and its content is primarily base
 		- [rebaseしてみるconflictあり](#rebase%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8Bconflict%E3%81%82%E3%82%8A)
 		- [補足 conflict解消のための取り込みパターン](#%E8%A3%9C%E8%B6%B3-conflict%E8%A7%A3%E6%B6%88%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E5%8F%96%E3%82%8A%E8%BE%BC%E3%81%BF%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3)
 	- [Conflict解消](#conflict%E8%A7%A3%E6%B6%88)
+		- [ベースブランチの最新を取り込む](#%E3%83%99%E3%83%BC%E3%82%B9%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E3%81%AE%E6%9C%80%E6%96%B0%E3%82%92%E5%8F%96%E3%82%8A%E8%BE%BC%E3%82%80)
 	- [Undo and Change Commit](#undo-and-change-commit)
 		- [commitを打ち消しの基本](#commit%E3%82%92%E6%89%93%E3%81%A1%E6%B6%88%E3%81%97%E3%81%AE%E5%9F%BA%E6%9C%AC)
 		- [テストデータを準備する](#%E3%83%86%E3%82%B9%E3%83%88%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E6%BA%96%E5%82%99%E3%81%99%E3%82%8B)
@@ -648,16 +649,16 @@ VS Codeの場合、以下の３つのオプションから取り込み方を選�
 
 ## Conflict解消
 
- TBU
+### ベースブランチの最新を取り込む
 
-> git pull
+myfeatureブランチにベースブランチ(main) の最新状態を取り込む
+
 ```
-git checkout myfeature
-
 git pull origin main
-= 
-git fetch origin main
-git merge origin/main
+# or git fetch origin main
+
+git co myfeature
+git merge main
 ```
 
 ## Undo and Change Commit
