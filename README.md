@@ -7,7 +7,7 @@ This is my personal GitHub sandbox repository, and its content is primarily base
 - [github-sandbox](#github-sandbox)
 	- [Git コンセプト](#git-%E3%82%B3%E3%83%B3%E3%82%BB%E3%83%97%E3%83%88)
 	- [GitHubリポジトリ設定](#github%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E8%A8%AD%E5%AE%9A)
-	- [git 初期設定](#git-%E5%88%9D%E6%9C%9F%E8%A8%AD%E5%AE%9A)
+	- [Git 初期設定](#git-%E5%88%9D%E6%9C%9F%E8%A8%AD%E5%AE%9A)
 		- [git config](#git-config)
 		- [git alias](#git-alias)
 	- [プルリクエスト経由でリモートmainにマージ](#%E3%83%97%E3%83%AB%E3%83%AA%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88%E7%B5%8C%E7%94%B1%E3%81%A7%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88main%E3%81%AB%E3%83%9E%E3%83%BC%E3%82%B8)
@@ -153,7 +153,7 @@ Gitの内部構造 (ここでは扱わない)
 ref: [ブランチ保護ルール](https://docs.github.com/ja/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/managing-a-branch-protection-rule)
 
 
-## git 初期設定
+## Git 初期設定
 
 ### git config
 
@@ -1536,3 +1536,26 @@ SUBTREE_NAME=github-sandbox
 git subtree pull --prefix=${SUBTREE_NAME} --squash ${SUBTREE_NAME} main
 ```
 
+
+## APPENDIX
+
+### GitHub CLI
+
+GitHub CLI (gh)とは、GitHubに対する操作をコマンドラインで行うことができるユーティリティで、IssueやPull Request、Repository等の操作をCLIで行える。
+
+https://cli.github.com/manual/
+
+使用例） GitHub CLIでIssue一覧表示 (macOS)
+
+```sh
+# CLI installl
+brew install gh
+
+# 認証設定
+gh auth login
+
+# Issue一覧表示
+gh issue list
+```
+
+#![](assets/gh-issue-list.png)
