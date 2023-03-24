@@ -66,6 +66,8 @@ This is my personal GitHub sandbox repository, and its content is primarily base
 	- [Subtree](#subtree)
 		- [add subtree](#add-subtree)
 		- [pull subtree](#pull-subtree)
+	- [APPENDIX](#appendix)
+		- [GitHub CLI](#github-cli)
 
 <!-- /TOC -->
 
