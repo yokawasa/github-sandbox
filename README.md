@@ -63,6 +63,8 @@ This is my personal GitHub sandbox repository, and its content is primarily base
 		- [git mergeテスト cherry-pickとの動きの比較のための実施](#git-merge%E3%83%86%E3%82%B9%E3%83%88-cherry-pick%E3%81%A8%E3%81%AE%E5%8B%95%E3%81%8D%E3%81%AE%E6%AF%94%E8%BC%83%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E5%AE%9F%E6%96%BD)
 		- [git cherry-pick テスト](#git-cherry-pick-%E3%83%86%E3%82%B9%E3%83%88)
 		- [GitHubで演習](#github%E3%81%A7%E6%BC%94%E7%BF%92)
+	- [PRレビュー](#pr%E3%83%AC%E3%83%93%E3%83%A5%E3%83%BC)
+		- [リモートBranchをlocalに取り混んでレビュー](#%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88branch%E3%82%92local%E3%81%AB%E5%8F%96%E3%82%8A%E6%B7%B7%E3%82%93%E3%81%A7%E3%83%AC%E3%83%93%E3%83%A5%E3%83%BC)
 	- [Subtree](#subtree)
 		- [add subtree](#add-subtree)
 		- [pull subtree](#pull-subtree)
@@ -1510,6 +1512,52 @@ cherry3.md
 5. release-hotfixでc1+c3をcherry-pickしてorigin push
 6. PR (release-hotfix -> release) のPRを作成 
 7. PRをマージ
+
+
+
+## PRレビュー
+
+### リモートBranchをlocalに取り混んでレビュー
+
+foobarさんからPRがきた。それでPR元の修正内容を取り込みたい。foobarさんのブランチを取り込んで内容を確認する。ここでは対象ブランチは`kubectl-plugin-hoge`とする
+
+> 対象リポジトリ: git@github.com:foobar/kubectl-plugin-hoge.git
+
+まずは、foobarさんのリポジトリをfoobarという名前でremoteブランチとして追加
+
+```bash
+# git remote add origin https://github.com/user/repo.git
+git remote add foobar https://github.com/foobar/kubectl-plugin-hoge.git
+```
+
+remoteブランチをチェック
+```bash
+$ git remote -v
+origin  ssh://git@github.com/yokawasa/kubectl-plugin-hoge (fetch)
+origin  ssh://git@github.com/yokawasa/kubectl-plugin-hoge (push)
+foobar    https://github.com/foobar/kubectl-plugin-hoge.git (fetch)
+foobar    https://github.com/foobar/kubectl-plugin-hoge.git (push)
+```
+
+リモートブランチをfetchしてローカルに取り込む
+
+```bash
+# git fetch remotename
+git fetch foobar
+
+$ git branch -a
+* master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/master
+  remotes/foobar/master
+  remotes/foobar/ns-and-ctx
+```
+
+取り込んだブランチにスイッチ
+
+```bash
+git co foobar/ns-and-ctx
+```
 
 
 
