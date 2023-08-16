@@ -275,7 +275,7 @@ git checkout -b my-branch1
 ブランチ一覧を表示。今がmy-branch1にいることがわかる
 
 ```
-git branch 
+git branch
 
   main
 * my-branch1
@@ -288,14 +288,23 @@ mainブランチに移動
 git checkout main
 ```
 
-my-branch1ブランチを削除
+my-branch1ブランチの名前をmy-branch1-aに変更（rename）
+
+```
+# git branch -m <new-branch-name>
+# Use the -m flag to change the name of the branch
+
+git branch -m my-branch1-a
+```
+
+my-branch1-aブランチを削除
 
 ```
 # git branch -d <branch名>
-git branch my-branch1
+git branch -d my-branch1-a
 ```
 
-ブランチ一覧を表示。my-branch1が消えていることを確認
+ブランチ一覧を表示。my-branch1-aが消えていることを確認
 
 ```
 git branch 
