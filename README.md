@@ -68,6 +68,10 @@ This is my personal GitHub sandbox repository, and its content is primarily base
 	- [Subtree](#subtree)
 		- [add subtree](#add-subtree)
 		- [pull subtree](#pull-subtree)
+	- [Tag](#tag)
+		- [add tag](#add-tag)
+		- [check tags](#check-tags)
+		- [delete tag](#delete-tag)
 	- [APPENDIX](#appendix)
 		- [GitHub CLI](#github-cli)
 
@@ -1575,26 +1579,69 @@ git co foobar/ns-and-ctx
 
 取り込みたいリポジトリを、外部リポジトリに登録する
 
-```
+```sh
+
 SUBTREE_NAME=github-sandbox
 git remote add $SUBTREE_NAME git@github.com:yokawasa/github-sandbox.git
-
 ```
 
 外部リポジトリに登録したものをサブディレクトリに登録する
 
-```
+```sh
 SUBTREE_NAME=github-sandbox
 git subtree add --prefix=${SUBTREE_NAME} --squash ${SUBTREE_NAME} main
 ```
 
 ### pull subtree
 
-```
+```sh
 SUBTREE_NAME=github-sandbox
 git subtree pull --prefix=${SUBTREE_NAME} --squash ${SUBTREE_NAME} main
 ```
 
+## Tag
+
+リポジトリに付与するタグの管理コマンド
+
+### add tag
+
+```sh
+
+# tagging without comment
+git tag TAG
+
+# tagging with comment
+git tag -a TAG -m 'TAG comment'
+```
+
+Then, finally push the TAG to the origin
+
+```sh
+
+git push origin TAG
+
+# alternative way
+git push --tags
+```
+
+### check tags
+
+```sh
+# list tags
+git tag
+
+# pattern match
+git tag -l 'v2.1.*'
+
+# check specific tag
+git check TAG
+```
+
+### delete tag
+
+```sh
+git tag -d TAG
+```
 
 ## APPENDIX
 
