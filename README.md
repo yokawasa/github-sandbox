@@ -1691,26 +1691,29 @@ gh issue list
 
 ### GitHubでmasterブランチをmainに変更
 
-手順は3つ:
-- 1. ブランチ名をmasterからmainに変更
+手順は次の3ステップ:
 
-  ```sh
-  git branch -m master main
-  git push origin main
+1. ブランチ名をmasterからmainに変更
 
-  # もしくは masterブランチに移動してからmainに変更
-  git branch master
-  git branch -m main
-  git push origin main
-  ```
-- 2. GitHub上でデフォルトブランチをmainに変更
-  Settings → Default Branch項目で、Default Branchを`master`から`main`に変更
+    ```sh
+    git branch -m master main
+    git push origin main
 
-- 3. 旧ブランチをリモートで削除
-  ```
-   git push origin :master
-   # or
-   git push --delete origin master 
-  ```
+    # もしくは masterブランチに移動してからmainに変更
+    git branch master
+    git branch -m main
+    git push origin main
+    ```
+2. GitHub上でデフォルトブランチをmainに変更
 
-＊ ブランチ名を変更したら、旧ブランチ名にアクセスされると自動的にリダイレクトされる [ref](https://docs.github.com/ja/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/renaming-a-branch#about-renaming-branches)
+    Settings → Default Branch項目で、Default Branchを`master`から`main`に変更
+
+3. 旧ブランチをリモートで削除
+
+    ```
+    git push origin :master
+    # or
+    git push --delete origin master 
+    ```
+
+    ＊ ブランチ名を変更したら、旧ブランチ名にアクセスされると自動的にリダイレクトされる [ref](https://docs.github.com/ja/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/renaming-a-branch#about-renaming-branches)
