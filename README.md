@@ -344,7 +344,10 @@ git checkout -b my-branch2
 #### リモートブランチの削除
 
 ```
-git push --delete origin branch_name
+git push --delete origin <branch_name>
+# もしくは 削除対象ブランチの先頭に「:」をつける
+# 例 masterを削除) git push origin :master
+git push origin :<branch_name>
 ```
 ref: https://qiita.com/yuu_ta/items/519ea47ac2c1ded032d9
 
@@ -1688,7 +1691,7 @@ gh issue list
 
 ### GitHubでmasterブランチをmainに変更
 
-手順は2つ:
+手順は3つ:
 - 1. ブランチ名をmasterからmainに変更
 
   ```sh
@@ -1702,3 +1705,12 @@ gh issue list
   ```
 - 2. GitHub上でデフォルトブランチをmainに変更
   Settings → Default Branch項目で、Default Branchを`master`から`main`に変更
+
+- 3. 旧ブランチをリモートで削除
+  ```
+   git push origin :master
+   # or
+   git push --delete origin master 
+  ```
+
+＊ ブランチ名を変更したら、旧ブランチ名にアクセスされると自動的にリダイレクトされる [ref](https://docs.github.com/ja/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/renaming-a-branch#about-renaming-branches)
