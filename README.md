@@ -1666,6 +1666,78 @@ git check TAG
 git tag -d TAG
 ```
 
+
+## Stash
+
+一時的にリポジトリの変更を退避させるコマンド。退避させることで、一時的にブランチをスイッチしたり、編集中のファイルがあるときにrebase（rebaseの時、コミットしていない一時変更のファイルがあるとstashしろと怒られるので）するのに役に立つ
+
+### 変更待避 (stash)してstash一覧表示
+
+```sh
+# 変更待避: 変更をstackに保存
+git stash
+
+# stash一覧表示
+git stash list
+```
+
+> Output
+
+```
+stash@{0}: WIP on master: 9839bba Add typescript version of React app
+stash@{1}: WIP on master: 2fd45a3 Added Web App
+```
+
+### stashした内容を復元
+
+```sh
+# 最新のstashした変更を復元
+git stash apply
+
+# 特定のstashした変更を復元
+# git stash apply stash@{n} # （nは0が0から始まる番号）
+git stash apply stash@{1}
+```
+
+### stashした内容を削除
+
+```sh
+# 最初のstashした内容を削除  stash@{0}
+git stash drop
+```
+
+stashした内容を復元して削除するにはpop。`git stash apply`した後に`git stash drop`
+
+```sh
+git stash pop
+```
+### rebase時のstash対応
+
+rebaseの時、コミットしていない一時変更のファイルがあるとstashしろと怒られる。
+
+手動でなるならば
+
+```sh
+git stash
+git rebase upstream/main
+git stash pop
+```
+
+`git rebase`に`--autostash`をつけるとstash / popを自動でやってくれる
+
+```sh
+git rebase upstream/main --autostash
+git rebase -i HEAD~2 --autostash
+```
+
+globalにautostashをtrueにしておけばデフォルト化されてこの手間を省略できる
+
+```sh
+git config --global rebase.autostash true
+```
+
+ref: [開発Tips配信@ムーザルch](https://twitter.com/moozaru_ch/status/1633754692206600193)
+
 ## APPENDIX
 
 ### GitHub CLI
