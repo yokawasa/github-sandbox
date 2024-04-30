@@ -1555,26 +1555,26 @@ cherry3.md
 
 ## PRレビュー
 
-### リモートBranchをlocalに取り混んでレビュー
+### リモートブランチをfetchしてレビュー1 (remote-add + fetch)
 
-foobarさんからPRがきた。それでPR元の修正内容を取り込みたい。foobarさんのブランチを取り込んで内容を確認する。ここでは対象ブランチは`kubectl-plugin-hoge`とする
+foobarさんからPRがきた。それでPR元の修正内容を取り込みたい。foobarさんのブランチ(`fix-bug`)を取り込んで内容を確認する。ここでは対象リポジトリは`sample-plugin-hoge`とする
 
-> 対象リポジトリ: git@github.com:foobar/kubectl-plugin-hoge.git
+> 対象リポジトリ: git@github.com:foobar/sample-plugin-hoge.git
 
 まずは、foobarさんのリポジトリをfoobarという名前でremoteブランチとして追加
 
 ```bash
 # git remote add origin https://github.com/user/repo.git
-git remote add foobar https://github.com/foobar/kubectl-plugin-hoge.git
+git remote add foobar https://github.com/foobar/sample-plugin-hoge.git
 ```
 
 remoteブランチをチェック
 ```bash
 $ git remote -v
-origin  ssh://git@github.com/yokawasa/kubectl-plugin-hoge (fetch)
-origin  ssh://git@github.com/yokawasa/kubectl-plugin-hoge (push)
-foobar    https://github.com/foobar/kubectl-plugin-hoge.git (fetch)
-foobar    https://github.com/foobar/kubectl-plugin-hoge.git (push)
+origin  ssh://git@github.com/yokawasa/sample-plugin-hoge (fetch)
+origin  ssh://git@github.com/yokawasa/sample-plugin-hoge (push)
+foobar    https://github.com/foobar/sample-plugin-hoge.git (fetch)
+foobar    https://github.com/foobar/sample-plugin-hoge.git (push)
 ```
 
 リモートブランチをfetchしてローカルに取り込む
@@ -1588,16 +1588,40 @@ $ git branch -a
   remotes/origin/HEAD -> origin/master
   remotes/origin/master
   remotes/foobar/master
-  remotes/foobar/ns-and-ctx
+  remotes/foobar/fix-bug
 ```
 
 取り込んだブランチにスイッチ
 
 ```bash
-git co foobar/ns-and-ctx
+git co foobar/fix-bug
 ```
 
+マージする場合は以下のようにします
 
+```bash
+git co main
+git merge foobar/fix-bug
+git push origin main
+```
+
+### リモートBranchをfetchしてレビュー2 (PR#とブランチ名でfetch)
+
+上記「リモートブランチをfetchしてレビュー1」の別解。
+
+foobarさんからPR(`PR#123`)がきた。それでPR元の修正内容を取り込みたい。foobarさんのブランチ(`fix-bug`)を取り込んで内容を確認する。ここでは対象リポジトリは`sample-plugin-hoge`とする
+
+まず、自分のローカルリポジトリにfoobarさんのブランチをフェッチします
+
+```bash
+git fetch origin pull/123/head:sample-plugin-hoge
+```
+
+次に、フェッチしたブランチをチェックアウトします
+
+```bash
+git checkout sample-plugin-hoge
+```
 
 ## Subtree
 ### add subtree
