@@ -732,10 +732,10 @@ git rebase origin/main
 - [merge and rebaseの理解/rebaseしてみる(conflictあり)
 ](#mergeしてみるconflictあり)
 
-リベースが成功したら、ローカルの変更をリモートにプッシュします。このとき、--forceフラグが必要になる
+リベースが成功したら、ローカルの変更をリモートにプッシュする。このとき、--forceフラグが必要になる
 
 ```sh
-git push origin edi-lambda --force
+git push origin myfeature --force
 ```
 
 
