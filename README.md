@@ -692,17 +692,46 @@ VS Codeの場合、以下の３つのオプションから取り込み方を選�
 
 ## Conflict解消
 
-### ベースブランチの最新を取り込む
+### ベースブランチの最新を取り込む (merge)
 
 myfeatureブランチにベースブランチ(main) の最新状態を取り込む
 
-```
+```sh
 git pull origin main
 # or git fetch origin main
 
 git co myfeature
 git merge main
 ```
+
+### ベースブランチの最新を取り込む (rebase)
+
+myfeatureブランチにベースブランチ(main) の最新状態を取り込む
+
+```sh
+git pull origin main
+# or git fetch origin main
+
+git co myfeature
+
+# myfeatureブランチをmainにリベース。これにより、mainの変更を取り込むことができる
+git rebase origin/main
+```
+
+もしリベース中にコンフリクトが発生した場合、Gitはエラーを出力し、問題のあるファイルを表示する。 該当ファイルを修正してから以下のコマンドを実行してリベースを続行する
+
+```sh
+git add <修正したファイル>
+git rebase --continue
+```
+
+リベースが成功したら、ローカルの変更をリモートにプッシュします。このとき、--forceフラグが必要になる
+
+```sh
+git push origin edi-lambda --force
+```
+
+
 
 ## Undo and Change Commit
 
