@@ -83,11 +83,13 @@
 	- [rebase時のstash対応](#rebase%E6%99%82%E3%81%AEstash%E5%AF%BE%E5%BF%9C)
 - [submodule](#submodule)
 	- [add submodule](#add-submodule)
+	- [catch-up the latest version](#catch-up-the-latest-version)
 - [APPENDIX](#appendix)
 	- [GitHub CLI](#github-cli)
 	- [GitHubでmasterブランチをmainに変更](#github%E3%81%A7master%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E3%82%92main%E3%81%AB%E5%A4%89%E6%9B%B4)
 
 <!-- /TOC -->
+
 
 This is my personal GitHub sandbox repository, and its content is primarily based on past GitHub trainings I've done for GitHub newbies.
 
@@ -1850,6 +1852,15 @@ Your branch is up to date with 'origin/main'.
 Changes to be committed:
         new file:   .gitmodules
         new file:   github-sandbox
+```
+
+### catch-up the latest version
+
+submodule元のレポジトリが更新された場合、submoduleでその内容をcatch upするには単純にそのディレクトリでgit pullすればよい
+
+```bash
+cd github-sandbox
+git pull
 ```
 
 
