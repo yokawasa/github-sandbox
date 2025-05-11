@@ -3,87 +3,87 @@
 - [Git コンセプト](#git-%E3%82%B3%E3%83%B3%E3%82%BB%E3%83%97%E3%83%88)
 - [GitHubリポジトリ設定](#github%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E8%A8%AD%E5%AE%9A)
 - [Git 初期設定](#git-%E5%88%9D%E6%9C%9F%E8%A8%AD%E5%AE%9A)
-	- [git config](#git-config)
-	- [git alias](#git-alias)
+  - [git config](#git-config)
+  - [git alias](#git-alias)
 - [プルリクエスト経由でリモートmainにマージ](#%E3%83%97%E3%83%AB%E3%83%AA%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88%E7%B5%8C%E7%94%B1%E3%81%A7%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88main%E3%81%AB%E3%83%9E%E3%83%BC%E3%82%B8)
-	- [git clone](#git-clone)
-	- [git branch](#git-branch)
-		- [ブランチ作成](#%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E4%BD%9C%E6%88%90)
-		- [ブランチ一覧表示](#%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E4%B8%80%E8%A6%A7%E8%A1%A8%E7%A4%BA)
-		- [あるブランチに移動](#%E3%81%82%E3%82%8B%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E3%81%AB%E7%A7%BB%E5%8B%95)
-		- [ブランチ名を変更](#%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E5%90%8D%E3%82%92%E5%A4%89%E6%9B%B4)
-		- [NOTE: GitHubでmasterを](#note-github%E3%81%A7master%E3%82%92)
-		- [ブランチを削除](#%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E3%82%92%E5%89%8A%E9%99%A4)
-		- [リモートブランチの削除](#%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E3%81%AE%E5%89%8A%E9%99%A4)
-	- [git status](#git-status)
-	- [git add](#git-add)
-		- [git add 取り消し](#git-add-%E5%8F%96%E3%82%8A%E6%B6%88%E3%81%97)
-	- [git commit](#git-commit)
-		- [Add Signed-off-by message](#add-signed-off-by-message)
-	- [git log](#git-log)
-	- [git push](#git-push)
+  - [git clone](#git-clone)
+  - [git branch](#git-branch)
+    - [ブランチ作成](#%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E4%BD%9C%E6%88%90)
+    - [ブランチ一覧表示](#%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E4%B8%80%E8%A6%A7%E8%A1%A8%E7%A4%BA)
+    - [あるブランチに移動](#%E3%81%82%E3%82%8B%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E3%81%AB%E7%A7%BB%E5%8B%95)
+    - [ブランチ名を変更](#%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E5%90%8D%E3%82%92%E5%A4%89%E6%9B%B4)
+    - [NOTE: GitHubでmasterを](#note-github%E3%81%A7master%E3%82%92)
+    - [ブランチを削除](#%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E3%82%92%E5%89%8A%E9%99%A4)
+    - [リモートブランチの削除](#%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E3%81%AE%E5%89%8A%E9%99%A4)
+  - [git status](#git-status)
+  - [git add](#git-add)
+    - [git add 取り消し](#git-add-%E5%8F%96%E3%82%8A%E6%B6%88%E3%81%97)
+  - [git commit](#git-commit)
+    - [Add Signed-off-by message](#add-signed-off-by-message)
+  - [git log](#git-log)
+  - [git push](#git-push)
 - [merge and rebaseの理解](#merge-and-rebase%E3%81%AE%E7%90%86%E8%A7%A3)
-	- [merge and rebaseの基本](#merge-and-rebase%E3%81%AE%E5%9F%BA%E6%9C%AC)
-	- [補足 merge: fast-forward ffと non fast-forwardno-ffの違い](#%E8%A3%9C%E8%B6%B3-merge-fast-forward-ff%E3%81%A8-non-fast-forwardno-ff%E3%81%AE%E9%81%95%E3%81%84)
-	- [テストデータ準備](#%E3%83%86%E3%82%B9%E3%83%88%E3%83%87%E3%83%BC%E3%82%BF%E6%BA%96%E5%82%99)
-	- [mergeしてみるconflictあり](#merge%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8Bconflict%E3%81%82%E3%82%8A)
-	- [rebaseしてみるconflictあり](#rebase%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8Bconflict%E3%81%82%E3%82%8A)
-	- [補足 conflict解消のための取り込みパターン](#%E8%A3%9C%E8%B6%B3-conflict%E8%A7%A3%E6%B6%88%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E5%8F%96%E3%82%8A%E8%BE%BC%E3%81%BF%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3)
+  - [merge and rebaseの基本](#merge-and-rebase%E3%81%AE%E5%9F%BA%E6%9C%AC)
+  - [補足 merge: fast-forward ffと non fast-forwardno-ffの違い](#%E8%A3%9C%E8%B6%B3-merge-fast-forward-ff%E3%81%A8-non-fast-forwardno-ff%E3%81%AE%E9%81%95%E3%81%84)
+  - [テストデータ準備](#%E3%83%86%E3%82%B9%E3%83%88%E3%83%87%E3%83%BC%E3%82%BF%E6%BA%96%E5%82%99)
+  - [mergeしてみるconflictあり](#merge%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8Bconflict%E3%81%82%E3%82%8A)
+  - [rebaseしてみるconflictあり](#rebase%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8Bconflict%E3%81%82%E3%82%8A)
+  - [補足 conflict解消のための取り込みパターン](#%E8%A3%9C%E8%B6%B3-conflict%E8%A7%A3%E6%B6%88%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E5%8F%96%E3%82%8A%E8%BE%BC%E3%81%BF%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3)
 - [Conflict解消](#conflict%E8%A7%A3%E6%B6%88)
-	- [ベースブランチの最新を取り込む merge](#%E3%83%99%E3%83%BC%E3%82%B9%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E3%81%AE%E6%9C%80%E6%96%B0%E3%82%92%E5%8F%96%E3%82%8A%E8%BE%BC%E3%82%80-merge)
-	- [ベースブランチの最新を取り込む rebase](#%E3%83%99%E3%83%BC%E3%82%B9%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E3%81%AE%E6%9C%80%E6%96%B0%E3%82%92%E5%8F%96%E3%82%8A%E8%BE%BC%E3%82%80-rebase)
+  - [ベースブランチの最新を取り込む merge](#%E3%83%99%E3%83%BC%E3%82%B9%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E3%81%AE%E6%9C%80%E6%96%B0%E3%82%92%E5%8F%96%E3%82%8A%E8%BE%BC%E3%82%80-merge)
+  - [ベースブランチの最新を取り込む rebase](#%E3%83%99%E3%83%BC%E3%82%B9%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E3%81%AE%E6%9C%80%E6%96%B0%E3%82%92%E5%8F%96%E3%82%8A%E8%BE%BC%E3%82%80-rebase)
 - [Undo and Change Commit](#undo-and-change-commit)
-	- [commitを打ち消しの基本](#commit%E3%82%92%E6%89%93%E3%81%A1%E6%B6%88%E3%81%97%E3%81%AE%E5%9F%BA%E6%9C%AC)
-	- [テストデータを準備する](#%E3%83%86%E3%82%B9%E3%83%88%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E6%BA%96%E5%82%99%E3%81%99%E3%82%8B)
-	- [commitを打ち消す](#commit%E3%82%92%E6%89%93%E3%81%A1%E6%B6%88%E3%81%99)
-	- [commit logを書き換える](#commit-log%E3%82%92%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%82%8B)
+  - [commitを打ち消しの基本](#commit%E3%82%92%E6%89%93%E3%81%A1%E6%B6%88%E3%81%97%E3%81%AE%E5%9F%BA%E6%9C%AC)
+  - [テストデータを準備する](#%E3%83%86%E3%82%B9%E3%83%88%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E6%BA%96%E5%82%99%E3%81%99%E3%82%8B)
+  - [commitを打ち消す](#commit%E3%82%92%E6%89%93%E3%81%A1%E6%B6%88%E3%81%99)
+  - [commit logを書き換える](#commit-log%E3%82%92%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%82%8B)
 - [Update Commit Message](#update-commit-message)
-	- [直前のCommitメッセージを修正](#%E7%9B%B4%E5%89%8D%E3%81%AEcommit%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%82%92%E4%BF%AE%E6%AD%A3)
-	- [つ前のCommitメッセージを修正](#%E3%81%A4%E5%89%8D%E3%81%AEcommit%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%82%92%E4%BF%AE%E6%AD%A3)
+  - [直前のCommitメッセージを修正](#%E7%9B%B4%E5%89%8D%E3%81%AEcommit%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%82%92%E4%BF%AE%E6%AD%A3)
+  - [つ前のCommitメッセージを修正](#%E3%81%A4%E5%89%8D%E3%81%AEcommit%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%82%92%E4%BF%AE%E6%AD%A3)
 - [Squash merge](#squash-merge)
-	- [Squash mergeの基本](#squash-merge%E3%81%AE%E5%9F%BA%E6%9C%AC)
-	- [テストデータを準備する](#%E3%83%86%E3%82%B9%E3%83%88%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E6%BA%96%E5%82%99%E3%81%99%E3%82%8B)
-	- [squash mergeする](#squash-merge%E3%81%99%E3%82%8B)
-	- [ただのmerge fast-forward merge](#%E3%81%9F%E3%81%A0%E3%81%AEmerge-fast-forward-merge)
-	- [PRをSquash mergeする](#pr%E3%82%92squash-merge%E3%81%99%E3%82%8B)
+  - [Squash mergeの基本](#squash-merge%E3%81%AE%E5%9F%BA%E6%9C%AC)
+  - [テストデータを準備する](#%E3%83%86%E3%82%B9%E3%83%88%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E6%BA%96%E5%82%99%E3%81%99%E3%82%8B)
+  - [squash mergeする](#squash-merge%E3%81%99%E3%82%8B)
+  - [ただのmerge fast-forward merge](#%E3%81%9F%E3%81%A0%E3%81%AEmerge-fast-forward-merge)
+  - [PRをSquash mergeする](#pr%E3%82%92squash-merge%E3%81%99%E3%82%8B)
 - [Undo/取り消しパターンrevert, reset, merge --abort,etc](#undo%E5%8F%96%E3%82%8A%E6%B6%88%E3%81%97%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3revert-reset-merge---abortetc)
-	- [Undoの基本](#undo%E3%81%AE%E5%9F%BA%E6%9C%AC)
-		- [git merge --abort](#git-merge---abort)
-		- [git reset commitID](#git-reset-commitid)
-		- [git revert commitID](#git-revert-commitid)
-	- [テスト準備](#%E3%83%86%E3%82%B9%E3%83%88%E6%BA%96%E5%82%99)
-	- [Undoテスト1: マージ成功後に元に戻すgit reset](#undo%E3%83%86%E3%82%B9%E3%83%881-%E3%83%9E%E3%83%BC%E3%82%B8%E6%88%90%E5%8A%9F%E5%BE%8C%E3%81%AB%E5%85%83%E3%81%AB%E6%88%BB%E3%81%99git-reset)
-	- [Undoテスト2: マージ成功後に元に戻すgit revert](#undo%E3%83%86%E3%82%B9%E3%83%882-%E3%83%9E%E3%83%BC%E3%82%B8%E6%88%90%E5%8A%9F%E5%BE%8C%E3%81%AB%E5%85%83%E3%81%AB%E6%88%BB%E3%81%99git-revert)
-	- [Undoテスト3: コンフリクトでマージ失敗マージ未完了git merge --abort](#undo%E3%83%86%E3%82%B9%E3%83%883-%E3%82%B3%E3%83%B3%E3%83%95%E3%83%AA%E3%82%AF%E3%83%88%E3%81%A7%E3%83%9E%E3%83%BC%E3%82%B8%E5%A4%B1%E6%95%97%E3%83%9E%E3%83%BC%E3%82%B8%E6%9C%AA%E5%AE%8C%E4%BA%86git-merge---abort)
-	- [Undoテスト4: コンフリクトでマージ失敗（マージ未完了）git reset](#undo%E3%83%86%E3%82%B9%E3%83%884-%E3%82%B3%E3%83%B3%E3%83%95%E3%83%AA%E3%82%AF%E3%83%88%E3%81%A7%E3%83%9E%E3%83%BC%E3%82%B8%E5%A4%B1%E6%95%97%E3%83%9E%E3%83%BC%E3%82%B8%E6%9C%AA%E5%AE%8C%E4%BA%86git-reset)
+  - [Undoの基本](#undo%E3%81%AE%E5%9F%BA%E6%9C%AC)
+    - [git merge --abort](#git-merge---abort)
+    - [git reset commitID](#git-reset-commitid)
+    - [git revert commitID](#git-revert-commitid)
+  - [テスト準備](#%E3%83%86%E3%82%B9%E3%83%88%E6%BA%96%E5%82%99)
+  - [Undoテスト1: マージ成功後に元に戻すgit reset](#undo%E3%83%86%E3%82%B9%E3%83%881-%E3%83%9E%E3%83%BC%E3%82%B8%E6%88%90%E5%8A%9F%E5%BE%8C%E3%81%AB%E5%85%83%E3%81%AB%E6%88%BB%E3%81%99git-reset)
+  - [Undoテスト2: マージ成功後に元に戻すgit revert](#undo%E3%83%86%E3%82%B9%E3%83%882-%E3%83%9E%E3%83%BC%E3%82%B8%E6%88%90%E5%8A%9F%E5%BE%8C%E3%81%AB%E5%85%83%E3%81%AB%E6%88%BB%E3%81%99git-revert)
+  - [Undoテスト3: コンフリクトでマージ失敗マージ未完了git merge --abort](#undo%E3%83%86%E3%82%B9%E3%83%883-%E3%82%B3%E3%83%B3%E3%83%95%E3%83%AA%E3%82%AF%E3%83%88%E3%81%A7%E3%83%9E%E3%83%BC%E3%82%B8%E5%A4%B1%E6%95%97%E3%83%9E%E3%83%BC%E3%82%B8%E6%9C%AA%E5%AE%8C%E4%BA%86git-merge---abort)
+  - [Undoテスト4: コンフリクトでマージ失敗（マージ未完了）git reset](#undo%E3%83%86%E3%82%B9%E3%83%884-%E3%82%B3%E3%83%B3%E3%83%95%E3%83%AA%E3%82%AF%E3%83%88%E3%81%A7%E3%83%9E%E3%83%BC%E3%82%B8%E5%A4%B1%E6%95%97%E3%83%9E%E3%83%BC%E3%82%B8%E6%9C%AA%E5%AE%8C%E4%BA%86git-reset)
 - [cherry-pick](#cherry-pick)
-	- [cherry-pickの基本](#cherry-pick%E3%81%AE%E5%9F%BA%E6%9C%AC)
-	- [絵で比較するmerge vs cherry-pick](#%E7%B5%B5%E3%81%A7%E6%AF%94%E8%BC%83%E3%81%99%E3%82%8Bmerge-vs-cherry-pick)
-	- [git merge commit2](#git-merge-commit2)
-	- [git cherry-pick commit4](#git-cherry-pick-commit4)
-	- [git cherry-pick commit5 commit6 commit7](#git-cherry-pick-commit5-commit6-commit7)
-	- [テスト準備](#%E3%83%86%E3%82%B9%E3%83%88%E6%BA%96%E5%82%99)
-	- [git mergeテスト cherry-pickとの動きの比較のための実施](#git-merge%E3%83%86%E3%82%B9%E3%83%88-cherry-pick%E3%81%A8%E3%81%AE%E5%8B%95%E3%81%8D%E3%81%AE%E6%AF%94%E8%BC%83%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E5%AE%9F%E6%96%BD)
-	- [git cherry-pick テスト](#git-cherry-pick-%E3%83%86%E3%82%B9%E3%83%88)
-	- [GitHubで演習](#github%E3%81%A7%E6%BC%94%E7%BF%92)
+  - [cherry-pickの基本](#cherry-pick%E3%81%AE%E5%9F%BA%E6%9C%AC)
+  - [絵で比較するmerge vs cherry-pick](#%E7%B5%B5%E3%81%A7%E6%AF%94%E8%BC%83%E3%81%99%E3%82%8Bmerge-vs-cherry-pick)
+  - [git merge commit2](#git-merge-commit2)
+  - [git cherry-pick commit4](#git-cherry-pick-commit4)
+  - [git cherry-pick commit5 commit6 commit7](#git-cherry-pick-commit5-commit6-commit7)
+  - [テスト準備](#%E3%83%86%E3%82%B9%E3%83%88%E6%BA%96%E5%82%99)
+  - [git mergeテスト cherry-pickとの動きの比較のための実施](#git-merge%E3%83%86%E3%82%B9%E3%83%88-cherry-pick%E3%81%A8%E3%81%AE%E5%8B%95%E3%81%8D%E3%81%AE%E6%AF%94%E8%BC%83%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E5%AE%9F%E6%96%BD)
+  - [git cherry-pick テスト](#git-cherry-pick-%E3%83%86%E3%82%B9%E3%83%88)
+  - [GitHubで演習](#github%E3%81%A7%E6%BC%94%E7%BF%92)
 - [PRレビュー](#pr%E3%83%AC%E3%83%93%E3%83%A5%E3%83%BC)
-	- [リモートブランチをfetchしてレビュー1 remote-add + fetch](#%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E3%82%92fetch%E3%81%97%E3%81%A6%E3%83%AC%E3%83%93%E3%83%A5%E3%83%BC1-remote-add--fetch)
-	- [リモートBranchをfetchしてレビュー2 PR#とブランチ名でfetch](#%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88branch%E3%82%92fetch%E3%81%97%E3%81%A6%E3%83%AC%E3%83%93%E3%83%A5%E3%83%BC2-pr%E3%81%A8%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E5%90%8D%E3%81%A7fetch)
+  - [リモートブランチをfetchしてレビュー1 remote-add + fetch](#%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E3%82%92fetch%E3%81%97%E3%81%A6%E3%83%AC%E3%83%93%E3%83%A5%E3%83%BC1-remote-add--fetch)
+  - [リモートBranchをfetchしてレビュー2 PR#とブランチ名でfetch](#%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88branch%E3%82%92fetch%E3%81%97%E3%81%A6%E3%83%AC%E3%83%93%E3%83%A5%E3%83%BC2-pr%E3%81%A8%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E5%90%8D%E3%81%A7fetch)
 - [Subtree](#subtree)
-	- [add subtree](#add-subtree)
-	- [pull subtree](#pull-subtree)
+  - [add subtree](#add-subtree)
+  - [pull subtree](#pull-subtree)
 - [Tag](#tag)
-	- [add tag](#add-tag)
-	- [check tags](#check-tags)
-	- [delete tag](#delete-tag)
+  - [add tag](#add-tag)
+  - [check tags](#check-tags)
+  - [delete tag](#delete-tag)
 - [Stash](#stash)
-	- [変更待避 stashしてstash一覧表示](#%E5%A4%89%E6%9B%B4%E5%BE%85%E9%81%BF-stash%E3%81%97%E3%81%A6stash%E4%B8%80%E8%A6%A7%E8%A1%A8%E7%A4%BA)
-	- [stashした内容を復元](#stash%E3%81%97%E3%81%9F%E5%86%85%E5%AE%B9%E3%82%92%E5%BE%A9%E5%85%83)
-	- [stashした内容を削除](#stash%E3%81%97%E3%81%9F%E5%86%85%E5%AE%B9%E3%82%92%E5%89%8A%E9%99%A4)
-	- [rebase時のstash対応](#rebase%E6%99%82%E3%81%AEstash%E5%AF%BE%E5%BF%9C)
+  - [変更待避 stashしてstash一覧表示](#%E5%A4%89%E6%9B%B4%E5%BE%85%E9%81%BF-stash%E3%81%97%E3%81%A6stash%E4%B8%80%E8%A6%A7%E8%A1%A8%E7%A4%BA)
+  - [stashした内容を復元](#stash%E3%81%97%E3%81%9F%E5%86%85%E5%AE%B9%E3%82%92%E5%BE%A9%E5%85%83)
+  - [stashした内容を削除](#stash%E3%81%97%E3%81%9F%E5%86%85%E5%AE%B9%E3%82%92%E5%89%8A%E9%99%A4)
+  - [rebase時のstash対応](#rebase%E6%99%82%E3%81%AEstash%E5%AF%BE%E5%BF%9C)
 - [APPENDIX](#appendix)
-	- [GitHub CLI](#github-cli)
-	- [GitHubでmasterブランチをmainに変更](#github%E3%81%A7master%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E3%82%92main%E3%81%AB%E5%A4%89%E6%9B%B4)
+  - [GitHub CLI](#github-cli)
+  - [GitHubでmasterブランチをmainに変更](#github%E3%81%A7master%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E3%82%92main%E3%81%AB%E5%A4%89%E6%9B%B4)
 
 <!-- /TOC -->
 
@@ -92,17 +92,20 @@ This is my personal GitHub sandbox repository, and its content is primarily base
 ## Git コンセプト
 
 Gitはスナップショットの集合であり、差分ではない
-  - Git: データは一連のスナップショット
-  - CVS、Subversion、Perforce、Bazaar: 差分リスト
+
+- Git: データは一連のスナップショット
+- CVS、Subversion、Perforce、Bazaar: 差分リスト
 
 Gitの基本ワークフロー
-  1. 作業ディレクトリのファイルを修正する
-  2. 修正されたファイル(`modified`)のスナップショットをステージング・エリアに追加(`git add`)
-  3. コミットする(`git commit`)
+
+1. 作業ディレクトリのファイルを修正する
+2. 修正されたファイル(`modified`)のスナップショットをステージング・エリアに追加(`git add`)
+3. コミットする(`git commit`)
 
 Gitプロジェクトの3つの主要な部分
+
 - `Working Directory (Working Tree)`: プロジェクトの1つのバージョンがチェックアウトされたもの。Gitディレクトリの圧縮されたデータベースから引き出されてディスクに配置。自分たちが直接編集するのはここ。
-- `Staging Area (stage / index / cache)`: 次のコミットに何が含まれるかに関しての情報を蓄えた1つのファイル。「インデックス」とも呼ばれる。実体は`.git/index`
+- `Staging Area (stage / index / cache)`: 次のコミットに何が含まれるかに関しての情報を蓄えた1つのファイル。「インデックス」とも呼ばれる。実体は `.git/index`
 - `Local Repository (.git)`: プロジェクトのメタデータとオブジェクトのデータベース。リポジトリをクローンしたときにコピーされる。HEAD
 
 ![](assets/git-storage-model.png)
@@ -111,20 +114,22 @@ ref: https://www3.ntu.edu.sg/home/ehchua/programming/howto/Git_HowTo.html
 
 HEAD / Stage(index) / Working directory
 
--  `HEAD`: the last commit in the currently checked-out branch
--  `Stage(index)`: Staging area, stage, index, cacheはすべて同じ
--  `working directory (working tree)`
+- `HEAD`: the last commit in the currently checked-out branch
+- `Stage(index)`: Staging area, stage, index, cacheはすべて同じ
+- `working directory (working tree)`
 
 ![](https://i.stack.imgur.com/y8gFk.png)
 
 ref: [How do I show the changes which have been staged?](https://stackoverflow.com/questions/1587846/how-do-i-show-the-changes-which-have-been-staged)
 
 ファイルの3つのステータス
-  - `Commited` コミット済: ローカル・データベースにデータが安全に格納されていること
-  - `Modified` 修正済 
-  - `Staged` ステージ済: 現在のバージョンの修正されたファイルに印をつけている状態
+
+- `Commited` コミット済: ローカル・データベースにデータが安全に格納されていること
+- `Modified` 修正済
+- `Staged` ステージ済: 現在のバージョンの修正されたファイルに印をつけている状態
 
 追跡されているとは？= 直近のスナップショットに存在していること
+
 - `untracked`: 追跡されてない
 - `tracked`: 追跡されている
   - `unmodified`: 修正されていない
@@ -140,15 +145,15 @@ local / origin / upstreamの概念
 
 ref: [What is the difference between origin and upstream on GitHub?](https://stackoverflow.com/questions/9257533/what-is-the-difference-between-origin-and-upstream-on-github)
 
-
 参照ページ
+
 - [Gitの基本 - 1.3 使い始める](https://git-scm.com/book/ja/v2/%E4%BD%BF%E3%81%84%E5%A7%8B%E3%82%81%E3%82%8B-Git%E3%81%AE%E5%9F%BA%E6%9C%AC)
 - [Gitの基本 - 変更内容のリポジトリへの記録](https://git-scm.com/book/ja/v2/Git-%E3%81%AE%E5%9F%BA%E6%9C%AC-%E5%A4%89%E6%9B%B4%E5%86%85%E5%AE%B9%E3%81%AE%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%B8%E3%81%AE%E8%A8%98%E9%8C%B2)
 - [How do I show the changes which have been staged?](https://stackoverflow.com/questions/1587846/how-do-i-show-the-changes-which-have-been-staged)
 - [What is the difference between origin and upstream on GitHub?](https://stackoverflow.com/questions/9257533/what-is-the-difference-between-origin-and-upstream-on-github)
 
-
 Gitの内部構造 (ここでは扱わない)
+
 - [Gitの内側 - Gitオブジェクト](http://git-scm.com/book/ja/v2/Git%E3%81%AE%E5%86%85%E5%81%B4-Git%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88)
 - [Gitの内側 - Gitの参照](http://git-scm.com/book/ja/v2/Git%E3%81%AE%E5%86%85%E5%81%B4-Git%E3%81%AE%E5%8F%82%E7%85%A7)
 - [Gitのインデックスの中身](https://zenn.dev/kaityo256/articles/inside_the_index)
@@ -164,14 +169,13 @@ Gitの内部構造 (ここでは扱わない)
 
 ![](assets/branch-setup.png)
 
-2 管理者も対象 (`main`ブランチのマージを PRレビュー必須) 
+2 管理者も対象 (`main`ブランチのマージを PRレビュー必須)
 
 `Include administrators` にチェックを入れる
 
 ![](assets/branch-setup-include-admin.png)
 
 ref: [ブランチ保護ルール](https://docs.github.com/ja/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/managing-a-branch-protection-rule)
-
 
 ## Git 初期設定
 
@@ -189,7 +193,7 @@ user.email=yokawasa@gmail.com
 ...
 ```
 
-`user.name`と`user.address`を設定する。`--global`オプションでglobalレベルの設定であることを指定。一方、`--local`でリポジトリレベルの設定が可能。
+`user.name`と `user.address`を設定する。`--global`オプションでglobalレベルの設定であることを指定。一方、`--local`でリポジトリレベルの設定が可能。
 
 ```bash
 #  git config --global user.name "[name]"
@@ -220,6 +224,7 @@ user.email=yokawasa@gmail.com
 ```
 
 その他git config設定については
+
 - [Attlassian Gitチュートリアル git config](https://www.atlassian.com/ja/git/tutorials/setting-up-a-repository/git-config)
 
 ### git alias
@@ -250,27 +255,30 @@ git co hoge
 ```
 
 その他git alias設定については
+
 - [Attlassian Gitチュートリアル git config](https://www.atlassian.com/ja/git/tutorials/setting-up-a-repository/git-config)
 
-
 > Note: git sandboxで使用するgit config, alias設定
+>
 > ```
 > # ff merge false
 > git config --global --add merge.ff false
 > # ff merge in pull
 > git config --global --add pull.ff only
-> 
+>
 > # git log graph pretty format表示
 > git config --global alias.l "log --graph --all --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'"
-> 
+>
 > ```
 
 ## プルリクエスト経由でリモートmainにマージ
 
 > **NOTE**
+>
 > - mainへの直push絶対にやらない  (一般的にはブランチ保護ルールを適用してmain直pushをブロックする)
 > - 作業用ブランチを切って作業する
-### git clone 
+
+### git clone
 
 テスト用リポジトリをgit cloneしてディレクトリを移動
 
@@ -353,8 +361,8 @@ git push --delete origin <branch_name>
 # 例 masterを削除) git push origin :master
 git push origin :<branch_name>
 ```
-ref: https://qiita.com/yuu_ta/items/519ea47ac2c1ded032d9
 
+ref: https://qiita.com/yuu_ta/items/519ea47ac2c1ded032d9
 
 ### git status
 
@@ -366,7 +374,7 @@ ref: https://qiita.com/yuu_ta/items/519ea47ac2c1ded032d9
 cp -p tools/service/svc-a/svc-a.sh tools/service/svc-a/test.sh 
 ```
 
-次に、`git status`でGitファイルの状態を確認する。test.shが`Untracked`であることがわかる
+次に、`git status`でGitファイルの状態を確認する。test.shが `Untracked`であることがわかる
 
 ```
 git status
@@ -420,7 +428,7 @@ git commit -m "updated"
 よくOSSでsign-off-byをつけたメッセージが求められるプロジェクトがある。
 たとえばこちらのプロジェクト → [Developer Certificate of Origin in KEDA](https://github.com/kedacore/keda/blob/main/CONTRIBUTING.md#developer-certificate-of-origin-signing-your-work)
 
-`git commit`に`-s` | `--signoff`オプションを追加することでcommitメッセージにsign-off-byを付与できる。
+`git commit`に `-s` | `--signoff`オプションを追加することでcommitメッセージにsign-off-byを付与できる。
 
 ```
 git commit -s -m 'This is my commit message'
@@ -431,11 +439,11 @@ Author: Yoichi Kawasaki <yokawasa@gmail.com>
 Date:   Thu Jun 2 22:43:23 2022 +0900
 
     This is my commit message
-    
+  
     Signed-off-by: Yoichi Kawasaki <yokawasa@gmail.com> <<<<<< これ
 ```
 
-なお、sign-off-byメッセージは通常メッセージと同じように`--amend`オプションで修正することが可能
+なお、sign-off-byメッセージは通常メッセージと同じように `--amend`オプションで修正することが可能
 
 ```
 git commit --amend -s
@@ -454,6 +462,7 @@ Signed-off-by: Your Name <your.email@example.com>
 ```
 git config --global commit.template ~/MYPROJECT/git-template
 ```
+
 ### git log
 
 Gitのログの履歴を確認する
@@ -479,7 +488,7 @@ Author: Yoichi Kawasaki <yokawasa@gmail.com>
 Date:   Tue Jun 7 12:59:02 2022 +0900
 
     Merge pull request #1 from yokawasa/init-entry
-    
+  
     add initial files
 ```
 
@@ -498,10 +507,11 @@ mergeもrebaseも目的は１つ: 変更を１つのブランチから別のブ�
 ![](assets/mrege-rebase-basic-before.png)
 
 mergeは？
+
 - 変更を１つのブランチから別のブランチに統合。分岐したブランチのコミットをとってこない
 - fast-forwardとnon-fast-forwardによりmergeコミットが生成を区別
   - fast-forward merge(--ff): マージコミットは作られず、ブランチの参照先の更新だけが更新される
-  - non fast-forward merge (--no-ff) マージ : 意図的にfast-forwardを行わないコミット。マージコミットが作られる  
+  - non fast-forward merge (--no-ff) マージ : 意図的にfast-forwardを行わないコミット。マージコミットが作られる
 
 ```
 git merge <commit/branch>
@@ -515,6 +525,7 @@ merge後の状態
 ![](assets/mrege-rebase-basic-after-merge.png)
 
 rebaseは?
+
 - コミット履歴を移動したり修正、削除したりするコマンド
 - マージ前にコミット履歴をきれいにする目的で使用される事が多い (git rebaseしてからPR出す)
 - 分岐した時点からのコミット内容をとってきて、自分の変更後のコミットをその先端に移動する。取得してきたコミット番号は変わらないが、自分のブランチのコミットは変更される（過去のコミット履歴が変わるため）
@@ -532,9 +543,10 @@ ref: https://www.atlassian.com/git/tutorials/merging-vs-rebasing
 ### 補足 merge: fast-forward (ff)と non fast-forward(no-ff)の違い
 
 - fast-forwardマージ (--ff): マージコミットは作られず、ブランチの参照先の更新だけが更新される
-- non fast-forwardマージ (--no-ff) マージ : 意図的にfast-forwardを行わないコミット。マージコミットが作られる  
+- non fast-forwardマージ (--no-ff) マージ : 意図的にfast-forwardを行わないコミット。マージコミットが作られる
 
 merge commitがあると以下の点で便利。
+
 - merge commitのdiffを見るだけでそのブランチで行われた作業を見るのが容易
 - merge commitを取り消すことでmerge作業自体をなかったことにしたい場合も簡単
 
@@ -551,12 +563,14 @@ git config --global --add pull.ff only
 ```
 
 まとめると、次の設定をいれておくとよい
+
 ```
 git config --global --add merge.ff false
 git config --global --add pull.ff only
 ```
 
-ref: 
+ref:
+
 - [gitのmerge --no-ff のススメ](https://qiita.com/nog/items/c79469afbf3e632f10a1)
 - [A successful Git branching model (日本語訳)](http://keijinsonyaban.blogspot.com/2010/10/a-successful-git-branching-model.html)
 
@@ -626,6 +640,7 @@ git l
 ```
 
 最後に、次の処理のために今回のmerge commitをなかったコトにする
+
 ```
 # 直前のコミットを取り消しする
 git reset --hard HEAD^
@@ -677,7 +692,6 @@ git l
 * 7cb76e3 c0 - Yoichi Kawasaki, 16 minutes ago
 ```
 
-
 ### 補足 conflict解消のための取り込みパターン
 
 `=======`より上がHEAD (Current Change)、下が取り込む変更 (Incoming Change)。
@@ -685,16 +699,14 @@ git l
 ![](assets/resolve-conflict.png)
 
 VS Codeの場合、以下の３つのオプションから取り込み方を選択できる機能あり
+
 - Accept Current Change
 - Accept Incoming Change
 - Accept Both Change
 
-
-
 ## Conflict解消
 
 ベースブランチを pull またはfetchして、ターゲットブランチでmerge または rebaseする。 For merge and rebase, see: [merge and rebaseの理解](#merge-and-rebaseの理解)
-
 
 ### ベースブランチの最新を取り込む (merge)
 
@@ -711,7 +723,6 @@ git merge main
 もしmerge中にコンフリクトが発生した場合、Gitはエラーを出力し、問題のあるファイルを表示する。対処法は下記パートを参照せよ
 
 - [merge and rebaseの理解/mergeしてみるconflictあり](#mergeしてみるconflictあり)
-
 
 ### ベースブランチの最新を取り込む (rebase)
 
@@ -730,7 +741,7 @@ git rebase origin/main
 もしリベース中にコンフリクトが発生した場合、Gitはエラーを出力し、問題のあるファイルを表示する。対処法は下記パートを参照せよ
 
 - [merge and rebaseの理解/rebaseしてみる(conflictあり)
-](#mergeしてみるconflictあり)
+  ](#mergeしてみるconflictあり)
 
 リベースが成功したら、ローカルの変更をリモートにプッシュする。このとき、--forceフラグが必要になる
 
@@ -738,13 +749,11 @@ git rebase origin/main
 git push origin myfeature --force
 ```
 
-
-
 ## Undo and Change Commit
 
 ### commitを打ち消しの基本
 
-git revert に打ち消したい`commit-id`を指定する
+git revert に打ち消したい `commit-id`を指定する
 
 ```
 # コミット打ち消し ＋「Revert + <元のコミットのメッセージ>」なコミット作成
@@ -797,6 +806,7 @@ add c3
 ```
 
 コミットログを確認
+
 ```
 git l
 
@@ -829,7 +839,7 @@ git l
 * 7223760 c1 - Yoichi Kawasaki, 7 minutes ago
 * 9591f87 c0 - Yoichi Kawasaki, 7 minutes ago
 ```
- 
+
 次に、さらにrevert commit (`9150f70`) をrevertしてみる
 
 ```
@@ -837,6 +847,7 @@ git revert 9150f70
 ```
 
 コミットメッセージを作成後、ファイル内容とログを確認。c3の打ち消しこみっとが打ち消されていることがわかる
+
 ```
 cat revert.md
 
@@ -879,13 +890,12 @@ command の内容
 # .       specified). Use -c <commit> to reword the commit message.
 ```
 
-
-
-たとえば、revertログを書き換え（ここではdrop）たい場合、`124421f`、`9150f70`より前の`3dd91e1`でrebaseする
+たとえば、revertログを書き換え（ここではdrop）たい場合、`124421f`、`9150f70`より前の `3dd91e1`でrebaseする
 
 ```
 git rebase -i 3dd91e1
 ```
+
 すると次のような編集モードでメッセージが表示される
 
 ```
@@ -910,7 +920,6 @@ git l
 * 7223760 c1 - Yoichi Kawasaki, 10 minutes ago
 * 9591f87 c0 - Yoichi Kawasaki, 10 minutes ago
 ```
-
 
 ## Update Commit Message
 
@@ -973,7 +982,7 @@ git commit --amend
 
 ![](assets/update-commit-message3.png)
 
-もしくは、単に`-m`オプションを付与してメッセージを更新できる
+もしくは、単に `-m`オプションを付与してメッセージを更新できる
 
 ```
 git commit --amend -s -m "Added sqlcheck.yml added message"
@@ -1008,15 +1017,16 @@ c49eeb0 Added sqlcheck.yml added message <<<<<<<<<<<<<<< 期待通り変更さ�
 git push origin master --force
 ```
 
-
 ref:
+
 - [Fix commit message](https://www.granfairs.com/blog/staff/git-commit-fix)
 - [git fast-forward mergeについて](https://qiita.com/vsanna/items/451b42f886c599a16a55)
 
 ## Squash merge
 
 ### Squash mergeの基本
-作業用ブランチで細かく粒度を小さくしてコミットしたログを、ある程度まとめてマージしたい場合に`--squash`オプションを活用する。
+
+作業用ブランチで細かく粒度を小さくしてコミットしたログを、ある程度まとめてマージしたい場合に `--squash`オプションを活用する。
 
 ```
 # ある<branch>ブランチの複数コミットをまとめてsquash mergeする
@@ -1028,6 +1038,7 @@ git merge --squash <branch>
 ここではsquash-testブランチから、作業用にsquash-test-devブランチを作成してそこで作業を行う（複数コミットする）。その内容をsquash-testブランチにマージするときに 複数コミットログをまとめてsquash mergeする
 
 まずはsquash-testブランチを切って、少し作業をする
+
 ```
 git checkout -b squash-test
 
@@ -1036,7 +1047,9 @@ echo "add c0" >> squash.md && git add squash.md && git commit -m "c0"
 echo "add c1" >> squash.md && git add squash.md && git commit -m "c1"
 echo "add c2" >> squash.md && git add squash.md && git commit -m "c2"
 ```
+
 ログをみる
+
 ```
 git l
 
@@ -1053,7 +1066,9 @@ echo "add c3" >> squash.md && git add squash.md && git commit -m "c3"
 echo "add c4" >> squash.md && git add squash.md && git commit -m "c4"
 echo "add c5" >> squash.md && git add squash.md && git commit -m "c5"
 ```
+
 ログをみる
+
 ```
 git l
 * 01eb340 (HEAD -> squash-test-dev) c5 - Yoichi Kawasaki, 18 seconds ago
@@ -1065,6 +1080,7 @@ git l
 ```
 
 ### squash mergeする
+
 それではsquash-testに移動して、squash-test-devブランチの作業ログ（複数）をsquash-testブランチにsquashマージする
 
 ```
@@ -1139,8 +1155,6 @@ PRを作成し、approveされmergeボタンを押すときに以下のイメー
 
 ![](assets/comparison-squash-merge-and-merge.png)
 
-
-
 ## Undo/取り消しパターン(revert, reset, merge --abort,etc)
 
 ### Undoの基本
@@ -1148,42 +1162,49 @@ PRを作成し、approveされmergeボタンを押すときに以下のイメー
 取り消し(Undo)はrevert, reset, merge --abortで実現可能。これらの違いについてポイントを下記する
 
 #### git merge --abort
+
 - ローカルマージのUndo。コンフリクト発生時などでUndo時に有効
 - **マージが完了している場合はUndoできない**
 - **コミット履歴: 残らない**
 
 #### git reset commitID
+
 - マージのUndo（リモートもOKだけどローカルUndoを推奨）。指定したコミットまで戻る。マージが完了していてもUndo可。
 - **コミット履歴: 消える**
 - 2つの使い方が可能
   - 指定したコミットまで戻る: `git reset <commit>`
   - 指定したファイルのみ指定したコミットの状態に戻る:  `git reset <commit> <file-path>`
-- 戻す場合どこまで変更中のファイルを残すか指定する3つのオプションが指定可能: `–soft`, `–mixed`,`–hard`。基本的にさっくりと戻すことを期待していることが多いと思うので`--hard`でOK
+- 戻す場合どこまで変更中のファイルを残すか指定する3つのオプションが指定可能: `–soft`, `–mixed`,`–hard`。基本的にさっくりと戻すことを期待していることが多いと思うので `--hard`でOK
 
 ![](assets/reset-option-soft-mixed-hard.png)
 
 - 定石パターン
   - `git reflog`との組み合わせて過去に戻る
+
 ```bash
 #コマンド履歴の一覧を確認
 git reflog
 #コミットを戻す
 git reset --hard <commitID>
 ```
+
 - これを使うのはローカルのみ! 複数人での共同開発レポジトリでは使わないことを推奨
   - コミット履歴は過去のコミットに全て紐づいているので過去のコミット履歴が変わると、その後のコミットのコミット番号も変わる。よって、git resetでコミットを戻してリモートレポジトリにプッシュしてしまうと、他の人たちのコミット履歴とズレてエラーが発生する。迷惑＆嫌がられる
 
 #### git revert commitID
+
 - マージのUndo（リモートでもOK）
 - **コミット履歴: 残る**
 - 使い方
   - 指定したマージ（commitID）のUndo :  `git revert <commitID>`
   - マージコミットUndo:  `git revert -m [1|2] <commitID>`    (パターン番号: 1 - 現在のブランチ, 2- 派生ブランチ)
   - リバートの打ち消し(revertコマンドを未実行状態に戻す): `git revert --abort`
--  共同開発レポジトリではこちらを使うことを推奨（コミット履歴に残るから）
+- 共同開発レポジトリではこちらを使うことを推奨（コミット履歴に残るから）
 
 ### テスト準備
+
 mainブランチからmerge-test-devを作成して、テスト用コミット(c0〜c4)を実行
+
 ```bash
 git checkout main
 git checkout -b merge-test-dev
@@ -1195,7 +1216,7 @@ echo "add c3" >> merge.md && git add merge.md && git commit -m "c3"
 echo "add c4" >> merge.md && git add merge.md && git commit -m "c4"
 ```
 
-mainブランチに戻り、mainブランチから`merge-test-main`ブランチを作成
+mainブランチに戻り、mainブランチから `merge-test-main`ブランチを作成
 
 ```bash
 git checkout main
@@ -1242,6 +1263,7 @@ add c1
 ```
 
 さらに、コミットc3をmergeしてみる
+
 ```
 git merge 184c432  # 184c432 = c3 commit ID (この場合、c3とその親にあたるc2 .. もマージされる)
 
@@ -1408,6 +1430,7 @@ CONFLICT (content): Merge conflict in merge.md
 Automatic merge failed; fix conflicts and then commit the result.
 
 ```
+
 あとは、さきほどのgit reset のときと同じように git reflogして git resetで戻すcommitIDを指定する
 
 ```bash
@@ -1420,14 +1443,14 @@ git reset --hard 2d669b9
 # git reset --hard HEAD
 ```
 
-
 ## cherry-pick
 
 ### cherry-pickの基本
 
-例えば PR (main -> release)において差分コミットがc0, c1, c2 ... cNと合った場合に、c1, c2, c4だけ取り込みたい場合のどうするだろう？ `git merge <commitID>`の場合、指定したcommitIDとその親に当たるcommitまで含めてmergeされてしまう（つまり c2をmergeするとその親にあたるc0, c1までも取り込まれる）。純粋に c1, c2, c4をmergeするには`cherry-pick`を使う
+例えば PR (main -> release)において差分コミットがc0, c1, c2 ... cNと合った場合に、c1, c2, c4だけ取り込みたい場合のどうするだろう？ `git merge <commitID>`の場合、指定したcommitIDとその親に当たるcommitまで含めてmergeされてしまう（つまり c2をmergeするとその親にあたるc0, c1までも取り込まれる）。純粋に c1, c2, c4をmergeするには `cherry-pick`を使う
 
 使い方
+
 - シングル: `git cherry-pick <commitID>`
 - 複数: `git cherry-pick <commitID1> <commitID2> ... <commitN>`
 
@@ -1441,9 +1464,9 @@ https://faun.pub/awesome-git-technique-for-partial-merge-7d64a7e62440
 ![cherry-pick-0](assets/cherry-pick0.png)
 
 ### git merge commit2
+
 `git merge`でcommit2を指定するパターン。
 git mergeではブランチではなくrevision (commit)で取り込む事が可能。ただしその場合次のようにcommit2の親であるcommit1までも取り込んでしまう
-
 
 ![cherry-pick-1](assets/cherry-pick1.png)
 
@@ -1459,10 +1482,9 @@ cherry-pickで複数commit指定してマージする
 
 ![cherry-pick-3](assets/cherry-pick3.png)
 
-
 ### テスト準備
 
-mainブランチから`cherry-dev`ブランチを作成して、テスト用コミット(c0〜c4)を実行
+mainブランチから `cherry-dev`ブランチを作成して、テスト用コミット(c0〜c4)を実行
 
 ```bash
 git checkout main
@@ -1493,7 +1515,7 @@ git l
 
 ### git mergeテスト (cherry-pickとの動きの比較のための実施)
 
-`git merge`をつかって コミットc0とc1を`cherry-main`ブランチにmergeする。
+`git merge`をつかって コミットc0とc1を `cherry-main`ブランチにmergeする。
 
 ```bash
 git merge 33953c0  # c1のcommit
@@ -1509,9 +1531,10 @@ ls -1 cherry*
 cherry0.md
 cherry1.md
 ```
+
 `git merge <c1 commit>`なのに、c1の親のc0もマージされていることがポイント。これがgit mergeの動き
 
-次に、コミットc3を`cherry-main`ブランチにmergeする。 コミットc3を指定すると、その親であるc2,c1,c0もmergeされる。
+次に、コミットc3を `cherry-main`ブランチにmergeする。 コミットc3を指定すると、その親であるc2,c1,c0もmergeされる。
 
 ```
 git merge fcf29b8 # c3のcommit 
@@ -1558,6 +1581,7 @@ cherry1.md
 コミットc3だけを取り込むためにcherry-pickを使う。
 
 下記のようにcherry-pickでコミットc3を指定する
+
 ```
 git cherry-pick fcf29b8    # c3のcommit ID
 
@@ -1577,24 +1601,22 @@ cherry1.md
 cherry3.md
 ```
 
-### GitHubで演習 
+### GitHubで演習
 
 1. cherry-devブランチをpushして、PR (cherry-dev -> main)を作成
 2. PRをマージ
 3. 新たにPR (main -> release)を作成.
-  ただし、ここで全てのcommitをマージすると問題があると仮定する。c1+c3だけ先にマージしたい
+   ただし、ここで全てのcommitをマージすると問題があると仮定する。c1+c3だけ先にマージしたい
 4. releaseブランチからrelease-hotfixというなのhotfixブランチを作成
 5. release-hotfixでc1+c3をcherry-pickしてorigin push
-6. PR (release-hotfix -> release) のPRを作成 
+6. PR (release-hotfix -> release) のPRを作成
 7. PRをマージ
-
-
 
 ## PRレビュー
 
 ### リモートブランチをfetchしてレビュー1 (remote-add + fetch)
 
-foobarさんからPRがきた。それでPR元の修正内容を取り込みたい。foobarさんのブランチ(`fix-bug`)を取り込んで内容を確認する。ここでは対象リポジトリは`sample-plugin-hoge`とする
+foobarさんからPRがきた。それでPR元の修正内容を取り込みたい。foobarさんのブランチ(`fix-bug`)を取り込んで内容を確認する。ここでは対象リポジトリは `sample-plugin-hoge`とする
 
 > 対象リポジトリ: git@github.com:foobar/sample-plugin-hoge.git
 
@@ -1606,6 +1628,7 @@ git remote add foobar https://github.com/foobar/sample-plugin-hoge.git
 ```
 
 remoteブランチをチェック
+
 ```bash
 $ git remote -v
 origin  ssh://git@github.com/yokawasa/sample-plugin-hoge (fetch)
@@ -1646,7 +1669,7 @@ git push origin main
 
 上記「リモートブランチをfetchしてレビュー1」の別解。
 
-foobarさんからPR(`PR#123`)がきた。それでPR元の修正内容を取り込みたい。foobarさんのブランチ(`fix-bug`)を取り込んで内容を確認する。ここでは対象リポジトリは`sample-plugin-hoge`とする
+foobarさんからPR(`PR#123`)がきた。それでPR元の修正内容を取り込みたい。foobarさんのブランチ(`fix-bug`)を取り込んで内容を確認する。ここでは対象リポジトリは `sample-plugin-hoge`とする
 
 まず、自分のローカルリポジトリにfoobarさんのブランチをフェッチします
 
@@ -1661,6 +1684,7 @@ git checkout sample-plugin-hoge
 ```
 
 ## Subtree
+
 ### add subtree
 
 取り込みたいリポジトリを、外部リポジトリに登録する
@@ -1729,7 +1753,6 @@ git check TAG
 git tag -d TAG
 ```
 
-
 ## Stash
 
 一時的にリポジトリの変更を退避させるコマンド。退避させることで、一時的にブランチをスイッチしたり、編集中のファイルがあるときにrebase（rebaseの時、コミットしていない一時変更のファイルがあるとstashしろと怒られるので）するのに役に立つ
@@ -1769,11 +1792,12 @@ git stash apply stash@{1}
 git stash drop
 ```
 
-stashした内容を復元して削除するにはpop。`git stash apply`した後に`git stash drop`
+stashした内容を復元して削除するにはpop。`git stash apply`した後に `git stash drop`
 
 ```sh
 git stash pop
 ```
+
 ### rebase時のstash対応
 
 rebaseの時、コミットしていない一時変更のファイルがあるとstashしろと怒られる。
@@ -1786,7 +1810,7 @@ git rebase upstream/main
 git stash pop
 ```
 
-`git rebase`に`--autostash`をつけるとstash / popを自動でやってくれる
+`git rebase`に `--autostash`をつけるとstash / popを自動でやってくれる
 
 ```sh
 git rebase upstream/main --autostash
@@ -1800,6 +1824,32 @@ git config --global rebase.autostash true
 ```
 
 ref: [開発Tips配信@ムーザルch](https://twitter.com/moozaru_ch/status/1633754692206600193)
+
+## submodule
+
+### add submodule
+
+github_sandboxレポジトリをgithub_sandboxディレクトリにsubmoduleとして登録
+
+```bash
+
+git submodule add git@github.com:yokawasa/github-sandbox.git github-sandbox
+
+```
+
+git statusで登録先のレポジトリのステータスをチェックすると、.gitmodulesと対象ディレクトリが追加されている
+
+```bash
+git status
+
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+        new file:   .gitmodules
+        new file:   github-sandbox
+```
+
 
 ## APPENDIX
 
@@ -1830,25 +1880,23 @@ gh issue list
 
 1. ブランチ名をmasterからmainに変更
 
-    ```sh
-    git branch -m master main
-    git push origin main
+   ```sh
+   git branch -m master main
+   git push origin main
 
-    # もしくは masterブランチに移動してからmainに変更
-    git branch master
-    git branch -m main
-    git push origin main
-    ```
+   # もしくは masterブランチに移動してからmainに変更
+   git branch master
+   git branch -m main
+   git push origin main
+   ```
 2. GitHub上でデフォルトブランチをmainに変更
 
-    Settings → Default Branch項目で、Default Branchを`master`から`main`に変更
-
+   Settings → Default Branch項目で、Default Branchを `master`から `main`に変更
 3. 旧ブランチをリモートで削除
 
-    ```
-    git push origin :master
-    # or
-    git push --delete origin master 
-    ```
-
-    ＊ ブランチ名を変更したら、旧ブランチ名にアクセスされると自動的にリダイレクトされる [ref](https://docs.github.com/ja/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/renaming-a-branch#about-renaming-branches)
+   ```
+   git push origin :master
+   # or
+   git push --delete origin master 
+   ```
+   ＊ ブランチ名を変更したら、旧ブランチ名にアクセスされると自動的にリダイレクトされる [ref](https://docs.github.com/ja/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/renaming-a-branch#about-renaming-branches)
