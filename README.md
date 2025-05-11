@@ -84,12 +84,12 @@
 - [submodule](#submodule)
 	- [add submodule](#add-submodule)
 	- [catch-up the latest version](#catch-up-the-latest-version)
+	- [delete submodule](#delete-submodule)
 - [APPENDIX](#appendix)
 	- [GitHub CLI](#github-cli)
 	- [GitHubでmasterブランチをmainに変更](#github%E3%81%A7master%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E3%82%92main%E3%81%AB%E5%A4%89%E6%9B%B4)
 
 <!-- /TOC -->
-
 
 This is my personal GitHub sandbox repository, and its content is primarily based on past GitHub trainings I've done for GitHub newbies.
 
@@ -1863,6 +1863,24 @@ cd github-sandbox
 git pull
 ```
 
+### delete submodule
+
+submoduleとして追加されたhoge（ディレクトリ）を削除する方法
+
+```
+# Remove the submodule entry from .git/config
+# git submodule deinit -f path/to/submodule
+git submodule deinit -f hoge
+
+# Remove the submodule directory from the superproject's .git/modules directory
+# rm -rf .git/modules/path/to/submodule
+rm -rf .git/modules/hoge
+
+# Remove the entry in .gitmodules and remove the submodule directory located at path/to/submodule
+git rm -f path/to/submodule
+```
+
+ref: https://stackoverflow.com/questions/1260748/how-do-i-remove-a-submodule/36593218#36593218
 
 ## APPENDIX
 
