@@ -3,6 +3,7 @@
 - [Git コンセプト](#git-%E3%82%B3%E3%83%B3%E3%82%BB%E3%83%97%E3%83%88)
 - [GitHubリポジトリ設定](#github%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E8%A8%AD%E5%AE%9A)
 - [Git 初期設定](#git-%E5%88%9D%E6%9C%9F%E8%A8%AD%E5%AE%9A)
+	- [generate ssh-key if not done yet](#generate-ssh-key-if-not-done-yet)
 	- [git config](#git-config)
 	- [git alias](#git-alias)
 - [プルリクエスト経由でリモートmainにマージ](#%E3%83%97%E3%83%AB%E3%83%AA%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88%E7%B5%8C%E7%94%B1%E3%81%A7%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88main%E3%81%AB%E3%83%9E%E3%83%BC%E3%82%B8)
@@ -182,6 +183,19 @@ Gitの内部構造 (ここでは扱わない)
 ref: [ブランチ保護ルール](https://docs.github.com/ja/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/managing-a-branch-protection-rule)
 
 ## Git 初期設定
+
+### generate ssh-key (if not done yet)
+
+Create SSH key and add it to GitHub account. If you have already generated SSH key and added it to GitHub account, you can skip this step. 
+
+```sh 
+# Generate SSH key. You can choose either ed25519 or rsa. ed25519 is recommended for better security and performance, but rsa is more widely supported.
+ssh-keygen -t ed25519 -C "your_email@example.com"
+
+# If you are using a legacy system that doesn't support the Ed25519 algorithm, use RSA instead.
+ssh-keygen -t rsa -b 2048 -C "your_email@example.com"
+```
+
 
 ### git config
 
