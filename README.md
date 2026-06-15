@@ -1943,6 +1943,12 @@ gh repo create my-project --private --source=. --remote=upstream
 
 # Issue一覧表示
 gh issue list
+
+# Run GitHub Actions manually (workflow release.yml)
+gh workflow run release.yml
+
+# Watch GitHub Actions job <27561911033> run
+gh run watch 27561911033 --exit-status 2>&1
 ```
 
 #![](assets/gh-issue-list.png)
